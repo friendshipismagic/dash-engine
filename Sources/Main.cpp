@@ -16,6 +16,9 @@
 // Window Manager
 #include <GL/freeglut.h>
 
+// GLSL-Like lib
+#include <glm/glm.hpp>
+
 // Reshape callback.
 // Called when a reshape of the window is happening
 void reshape(int width, int height) {
@@ -60,6 +63,36 @@ void specialinput(int key, int x, int y) {
 void idle() {
 }
 
+// OpenGL context creation
+void gl_init_context() {
+	// Enable experimental drivers
+	glewExperimental = GL_TRUE;
+
+	// Init GLEW
+	GLenum err = glewInit();
+	if(err != GLEW_OK) {
+		// Oops, GLEW failed to start
+		std::cerr << "GLEW Fatal error: "
+			<< glewGetErrorString(err) << std::endl;
+	}
+
+	// Back face culling
+	glCullFace(GL_BACK);
+	glEnable(GL_CULL_FACE);
+
+	// Less depth test for z-buffer
+	glEnable(GL_DEPTH_TEST);
+
+	// Force normalization
+	glEnable(GL_NORMALIZE);
+
+	// Set the basic line width to be 2px
+	glLineWidth(2.0f);
+
+	// Black background
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+}
+
 // Here we begin.
 // Start the FreeGLUT window manager
 int main(int argc, char **argv) {
@@ -69,6 +102,9 @@ int main(int argc, char **argv) {
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowSize(800, 600);
 	glutCreateWindow("IGR202");
+
+	// Init OpenGL context
+	gl_init_context();
 
 	// Register callbacks
 	glutReshapeFunc(reshape);
