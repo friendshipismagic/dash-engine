@@ -13,6 +13,9 @@ CXX = clang++
 # Libs to load TODO: OPENGL_PATH?
 LDLIBS = -lglut -lGLU -lGL -lGLEW -lm -lpthread
 
+# Auto-dependencies
+CPPFLAGS += -MMD -MP
+
 # C++ Flags
 CXXFLAGS = -std=c++14 -Wall -O2 -g -pthread
 
@@ -26,8 +29,6 @@ $(TARGET): $(OBJS)
 # Autodependencies
 DEPS = $(patsubst %.cpp,%.d,$(SRCS))
 -include $(DEPS)
-%.d: %.cpp
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -MM -MF $@ -MP $<
 
 # Cleanup
 clean:
