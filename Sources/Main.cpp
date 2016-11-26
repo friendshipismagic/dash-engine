@@ -19,6 +19,12 @@
 // GLSL-Like lib
 #include <glm/glm.hpp>
 
+// HID Manager lib
+#include "HID.h"
+
+// Managers
+HID::Manager gHIDManager;
+
 // Reshape callback.
 // Called when a reshape of the window is happening
 void reshape(int width, int height) {
@@ -38,24 +44,9 @@ void display() {
 	glutSwapBuffers();
 }
 
-// Keyboard callback.
-// Called when a basic key is pressed
-void keyboard(unsigned char key, int x, int y) {
-}
-
-// Mouse callback.
-// Called when a mouse event happens
-void mouse(int button, int state, int x, int y) {
-}
-
 // Motion callback.
 // Called when a mouse drag happens
 void motion(int x, int y) {
-}
-
-// Special inputs callback.
-// Called when a special key is pressed
-void specialinput(int key, int x, int y) {
 }
 
 // Idle callback.
@@ -97,6 +88,11 @@ void gl_init_context() {
 // Start the FreeGLUT window manager
 int main(int argc, char **argv) {
 
+	// Init log system
+	// Init config manager
+	// Init HID manager
+	gHIDManager.init();
+
 	// Init GLUT and create window
 	glutInit(&argc, argv); 
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
@@ -109,10 +105,10 @@ int main(int argc, char **argv) {
 	// Register callbacks
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
-	glutKeyboardFunc(keyboard);
-	glutMouseFunc(mouse);
+	glutKeyboardFunc(HID_manager::keyPressedCallback);
+	glutMouseFunc(HID_manager::mouseEventCallback);
+	glutSpecialFunc(HID_manager::keyPressedCallback);
 	glutMotionFunc(motion);
-	glutSpecialFunc(specialinput);
 	glutIdleFunc(idle);
 
 	// enter GLUT event processing cycle
