@@ -2,7 +2,7 @@
 TARGET = app
 
 # Sources
-SRCS = $(wildcard **/*.cpp)
+SRCS = $(shell find Sources -name '*.cpp')
 
 # Associated Objects
 OBJS = $(patsubst %.cpp,%.o,$(SRCS))
