@@ -84,6 +84,21 @@ void gl_init_context() {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
+// This function should just call the HID manager
+void keyPressedCallback(unsigned char key, int x, int y) {
+	gHIDManager.keyPressedCallback(key, x, y);
+}
+
+// This function should just call the HID manager
+void specialKeyPressedCallback(int key, int x, int y) {
+	gHIDManager.specialKeyPressedCallback(key, x, y);
+}
+
+// This function should just call the HID manager
+void mouseEventCallback(int button, int state, int x, int y) {
+	gHIDManager.mouseEventCallback(button, state, x, y);
+}
+
 // Here we begin.
 // Start the FreeGLUT window manager
 int main(int argc, char **argv) {
@@ -103,11 +118,11 @@ int main(int argc, char **argv) {
 	gl_init_context();
 
 	// Register callbacks
+	glutKeyboardFunc(keyPressedCallback);
+	glutMouseFunc(mouseEventCallback);
+	glutSpecialFunc(specialKeyPressedCallback);
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
-	glutKeyboardFunc(HID_manager::keyPressedCallback);
-	glutMouseFunc(HID_manager::mouseEventCallback);
-	glutSpecialFunc(HID_manager::keyPressedCallback);
 	glutMotionFunc(motion);
 	glutIdleFunc(idle);
 
