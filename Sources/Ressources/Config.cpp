@@ -9,6 +9,10 @@
 
 #include <string>
 #include <memory>
+#include <sys/stat.h>
+
+// Fast JSON Parser
+#include "rapidjson/document.h"
 
 #include "Config.h"
 
@@ -19,9 +23,28 @@ namespace Ressources {
 
 		// If the file does not exist, it should be created with a default
 		// configuration
+		// First, check if file exists
+		struct stat buffer;
+		bool file_not_exist = stat(filepath.c_str(), &buffer) == 0;
+		if(file_not_exist)
+			generate_default_config();
 
-		// TODO: Load the file and call the parser
-		
+		// Now file must exist, load the file
+		std::ifstream in(filename, std::ios::in);		
+		std::string toparse;
+		in.seekg(0, std::ios::end);
+		toparse.resize(in.tellg());
+		in.seekg(0, std::ios::beg);
+		in.read(&toparse[0], toparse.size());
+		in.close();
+
+		// Call the parser
+		rapidjson::Document dom;
+		dom.Parse(toparse.c_str());
+
+		// TODO: Check it has all the mandatory parameters
+		// assert(document.HasMember("hello"));
+
 		// TODO: put the parsed in variable
 	}
 }

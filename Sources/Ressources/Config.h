@@ -26,6 +26,9 @@ namespace Ressources {
 			// Initializer, taking a ressource manager to get the config file
 			void init(std::shared_ptr<Manager>);
 
+			// Generate a default config file with only mandatory parameters
+			void generate_default_config();
+
 		private:
 			std::string filepath;
 			std::map<std::string, std::string> key;
