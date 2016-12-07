@@ -7,16 +7,21 @@
  * ----------------------------------------------------------------------------
  */
 
-#include <String>
+#include <string>
+#include <memory>
 
 #include "Config.h"
 
 namespace Ressources {
-	void Config::init() {
-		// TODO: call the init with the default filepath
-	}
+	void Config::init(std::shared_ptr<Manager> localManager) {
+		// Get the full file path from the ressource manager
+		this->filepath = localManager->getConfigFilePath();
 
-	void Config::init(std::string filepath) {
-		// TODO: Load the file, call the parser and put the parsed in variable
+		// If the file does not exist, it should be created with a default
+		// configuration
+
+		// TODO: Load the file and call the parser
+		
+		// TODO: put the parsed in variable
 	}
 }

@@ -13,4 +13,9 @@ namespace Ressources {
 	void Manager::init() {
 		// TODO: Load all the ressources and manage them :)
 	}
+
+	std::string Manager::getConfigFilePath() {
+		// TODO: give the right file path of the config file
+		return "";
+	}
 }

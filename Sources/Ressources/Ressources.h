@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include <string>
+
 namespace Ressources {
 	class Manager {
 		public:
@@ -19,5 +21,9 @@ namespace Ressources {
 
 			// Initializer
 			void init();
+
+			// Config file ressource, it should look for the right config file
+			// and return its path
+			std::string getConfigFilePath();
 	};
 }

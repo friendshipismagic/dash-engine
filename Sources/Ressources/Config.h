@@ -9,7 +9,11 @@
 
 #pragma once
 
-#include <String>
+#include <string>
+#include <map>
+#include <memory>
+
+#include "Ressources.h"
 
 namespace Ressources {
 	class Config {
@@ -19,10 +23,11 @@ namespace Ressources {
 			// Default destructor, should not do anything
 			~Config() {};
 
-			// Initializer
-			void init();
+			// Initializer, taking a ressource manager to get the config file
+			void init(std::shared_ptr<Manager>);
 
-			// Better initializer, taking an URI to the config file
-			void init(std::string filepath);
+		private:
+			std::string filepath;
+			std::map<std::string, std::string> key;
 	};
 }
