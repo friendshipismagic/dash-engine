@@ -12,6 +12,7 @@
 #include <string>
 #include <map>
 #include <memory>
+#include <map>
 
 #include "Ressources.h"
 
@@ -29,8 +30,11 @@ namespace Ressources {
 			// Generate a default config file with only mandatory parameters
 			void generate_default_config();
 
+			// Get keymap
+			std::map<std::string, char> get_keymap();
+
 		private:
 			std::string filepath;
-			std::map<std::string, std::string> key;
+			std::map<std::string, std::string> parameters;
 	};
 }

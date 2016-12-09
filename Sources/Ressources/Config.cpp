@@ -10,6 +10,8 @@
 #include <string>
 #include <memory>
 #include <sys/stat.h>
+#include <fstream>
+#include <map>
 
 // Fast JSON Parser
 #include "rapidjson/document.h"
@@ -30,7 +32,7 @@ namespace Ressources {
 			generate_default_config();
 
 		// Now file must exist, load the file
-		std::ifstream in(filename, std::ios::in);		
+		std::ifstream in(filepath, std::ios::in | std::ios::binary);		
 		std::string toparse;
 		in.seekg(0, std::ios::end);
 		toparse.resize(in.tellg());
@@ -44,7 +46,16 @@ namespace Ressources {
 
 		// TODO: Check it has all the mandatory parameters
 		// assert(document.HasMember("hello"));
+	}
 
-		// TODO: put the parsed in variable
+	void Config::generate_default_config() {
+		// TODO: Generate a default config file
+	}
+
+	std::map<std::string, char> Config::get_keymap() {
+		std::map<std::string, char> keymap;
+		keymap["exit"] = 'q';
+
+		return keymap;
 	}
 }
