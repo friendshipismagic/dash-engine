@@ -7,15 +7,25 @@
  * ----------------------------------------------------------------------------
  */
 
+#include <memory>
+#include <map>
+#include <string>
+#include <iostream>
+
+#include "Ressources/Config.h"
+
 #include "HID.h"
 
 namespace HID {
-	void Manager::init() {
-		//TODO: Load the key binding
+	void Manager::init(std::shared_ptr<Ressources::Config> localConfig) {
+		// Load the key binding
+		keymap = localConfig->get_keymap();
 	}
 
 	void Manager::keyPressedCallback(unsigned char key, int x, int y) {
 		// TODO: Call the right observer depending on keybinding
+		std::cout << "Key " << key << " pressed, corresponds to "
+				  << keymap[key] << " event" << std::endl;
 	}
 
 	void Manager::specialKeyPressedCallback(int key, int x, int y) {

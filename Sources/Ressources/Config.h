@@ -14,7 +14,7 @@
 #include <memory>
 #include <map>
 
-#include "Ressources.h"
+#include "Ressources/Ressources.h"
 
 namespace Ressources {
 	class Config {
@@ -25,13 +25,13 @@ namespace Ressources {
 			~Config() {};
 
 			// Initializer, taking a ressource manager to get the config file
-			void init(std::shared_ptr<Manager>);
+			void init(std::shared_ptr<Ressources::Manager>);
 
 			// Generate a default config file with only mandatory parameters
 			void generate_default_config();
 
 			// Get keymap
-			std::map<std::string, char> get_keymap();
+			std::map<char, std::string> get_keymap();
 
 		private:
 			std::string filepath;

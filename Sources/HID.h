@@ -9,6 +9,11 @@
 
 #pragma once
 
+#include <map>
+#include <string>
+
+#include "Ressources/Config.h"
+
 namespace HID {
 	class Manager {
 		public:
@@ -18,7 +23,7 @@ namespace HID {
 			~Manager() {};
 
 			// Initializer, if needed
-			void init();
+			void init(std::shared_ptr<Ressources::Config>);
 
 			// Keyboard event handler
 			void keyPressedCallback(unsigned char key, int x, int y);
@@ -28,5 +33,9 @@ namespace HID {
 
 			// Mouse event handler
 			void mouseEventCallback(int button, int state, int x, int y);
+
+		private:
+			// Key binding
+			std::map<char, std::string> keymap;
 	};
 }

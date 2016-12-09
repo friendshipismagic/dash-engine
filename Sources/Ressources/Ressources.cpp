@@ -16,6 +16,6 @@ namespace Ressources {
 
 	std::string Manager::getConfigFilePath() {
 		// TODO: give the right file path of the config file
-		return "";
+		return "test.conf";
 	}
 }

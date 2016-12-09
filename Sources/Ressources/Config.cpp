@@ -19,7 +19,7 @@
 #include "Config.h"
 
 namespace Ressources {
-	void Config::init(std::shared_ptr<Manager> localManager) {
+	void Config::init(std::shared_ptr<Ressources::Manager> localManager) {
 		// Get the full file path from the ressource manager
 		this->filepath = localManager->getConfigFilePath();
 
@@ -50,11 +50,15 @@ namespace Ressources {
 
 	void Config::generate_default_config() {
 		// TODO: Generate a default config file
+		std::string default_conf = "{\"keymap\": \"a\"}";
+		std::ofstream out(filepath);
+		out << default_conf;
+		out.close();
 	}
 
-	std::map<std::string, char> Config::get_keymap() {
-		std::map<std::string, char> keymap;
-		keymap["exit"] = 'q';
+	std::map<char, std::string> Config::get_keymap() {
+		std::map<char, std::string> keymap;
+		keymap['q'] = "exit";
 
 		return keymap;
 	}

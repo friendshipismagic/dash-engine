@@ -9,6 +9,7 @@
 
 // Standard headers
 #include <iostream>
+#include <memory>
 
 // GL Related includes
 #include <GL/glew.h>
@@ -22,8 +23,14 @@
 // HID Manager lib
 #include "HID.h"
 
+// Config Manager lib
+#include "Ressources/Ressources.h"
+#include "Ressources/Config.h"
+
 // Managers
-HID::Manager gHIDManager;
+std::shared_ptr<Ressources::Manager> gRessourcesManager;
+std::shared_ptr<Ressources::Config> gConfigManager;
+std::shared_ptr<HID::Manager> gHIDManager;
 
 // Reshape callback.
 // Called when a reshape of the window is happening
@@ -86,17 +93,17 @@ void gl_init_context() {
 
 // This function should just call the HID manager
 void keyPressedCallback(unsigned char key, int x, int y) {
-	gHIDManager.keyPressedCallback(key, x, y);
+	gHIDManager->keyPressedCallback(key, x, y);
 }
 
 // This function should just call the HID manager
 void specialKeyPressedCallback(int key, int x, int y) {
-	gHIDManager.specialKeyPressedCallback(key, x, y);
+	gHIDManager->specialKeyPressedCallback(key, x, y);
 }
 
 // This function should just call the HID manager
 void mouseEventCallback(int button, int state, int x, int y) {
-	gHIDManager.mouseEventCallback(button, state, x, y);
+	gHIDManager->mouseEventCallback(button, state, x, y);
 }
 
 // Here we begin.
@@ -105,8 +112,14 @@ int main(int argc, char **argv) {
 
 	// Init log system
 	// Init config manager
+	gRessourcesManager = std::make_shared<Ressources::Manager>();
+	gRessourcesManager->init();
+	gConfigManager = std::make_shared<Ressources::Config>();
+	gConfigManager->init(gRessourcesManager);
+
 	// Init HID manager
-	gHIDManager.init();
+	gHIDManager = std::make_shared<HID::Manager>();
+	gHIDManager->init(gConfigManager);
 
 	// Init GLUT and create window
 	glutInit(&argc, argv); 
