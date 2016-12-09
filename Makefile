@@ -13,8 +13,11 @@ CXX = clang++
 # Libs to load TODO: OPENGL_PATH?
 LDLIBS = -lglut -lGLU -lGL -lGLEW -lm -lpthread
 
+# Include directory
+INCDIR = Sources/
+
 # Auto-dependencies
-CPPFLAGS += -MMD -MP
+CPPFLAGS += -MMD -MP -I$(INCDIR)
 
 # C++ Flags
 CXXFLAGS = -std=c++14 -Wall -O2 -g -pthread
