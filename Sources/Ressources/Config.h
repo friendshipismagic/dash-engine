@@ -12,7 +12,6 @@
 #include <string>
 #include <map>
 #include <memory>
-#include <map>
 
 #include "Ressources/Ressources.h"
 
