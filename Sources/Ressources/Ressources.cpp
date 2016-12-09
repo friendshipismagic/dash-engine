@@ -18,4 +18,9 @@ namespace Ressources {
 		// TODO: give the right file path of the config file
 		return "test.conf";
 	}
+
+	std::string Manager::getShadersFolderPath() {
+		// TODO: give the right file path of the shaders folder
+		return "Shaders/";
+	}
 }

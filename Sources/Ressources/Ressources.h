@@ -26,5 +26,9 @@ namespace Ressources {
 			// Config file ressource, it should look for the right config file
 			// and return its path
 			std::string getConfigFilePath();
+
+			// Shaders file ressource, it should look for the right shader file
+			// path and return it
+			std::string getShadersFolderPath();
 	};
 }
