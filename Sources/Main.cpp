@@ -11,6 +11,9 @@
 #include <iostream>
 #include <memory>
 
+// Logging system
+#include "easylogging++.h"
+
 // GL Related includes
 #include <GL/glew.h>
 
@@ -106,11 +109,19 @@ void mouseEventCallback(int button, int state, int x, int y) {
 	gHIDManager->mouseEventCallback(button, state, x, y);
 }
 
+// Macro used by easylogging for initializing the logging system
+INITIALIZE_EASYLOGGINGPP
+
 // Here we begin.
 // Start the FreeGLUT window manager
 int main(int argc, char **argv) {
 
-	// Init log system
+	// Init log system, and give it input arguments
+	START_EASYLOGGINGPP(argc, argv);
+	// Load logger conf
+	el::Configurations easylogConf("log.conf");
+	LOG(INFO) << "Logging system online";
+
 	// Init config manager
 	gRessourcesManager = std::make_shared<Ressources::Manager>();
 	gRessourcesManager->init();
