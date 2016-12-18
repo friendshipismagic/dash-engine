@@ -122,11 +122,14 @@ int main(int argc, char **argv) {
 	el::Configurations easylogConf("log.conf");
 	LOG(INFO) << "Logging system online";
 
-	// Init config manager
+	// Init ressource manager
+	LOG(DEBUG) << "Initializing ressource manager";
 	gRessourcesManager = std::make_shared<Ressources::Manager>();
 	gRessourcesManager->init();
+	LOG(DEBUG) << "Initializing config manager";
 	gConfigManager = std::make_shared<Ressources::Config>();
 	gConfigManager->init(gRessourcesManager);
+	LOG(INFO) << "Ressources online";
 
 	// Init HID manager
 	gHIDManager = std::make_shared<HID::Manager>();
@@ -142,6 +145,7 @@ int main(int argc, char **argv) {
 	gl_init_context();
 
 	// Register callbacks
+	LOG(INFO) << "Registering callbacks";
 	glutKeyboardFunc(keyPressedCallback);
 	glutMouseFunc(mouseEventCallback);
 	glutSpecialFunc(specialKeyPressedCallback);
@@ -149,6 +153,8 @@ int main(int argc, char **argv) {
 	glutDisplayFunc(display);
 	glutMotionFunc(motion);
 	glutIdleFunc(idle);
+
+	LOG(INFO) << "All systems online, ready to enter the game loop";
 
 	// enter GLUT event processing cycle
 	glutMainLoop();
