@@ -7,4 +7,13 @@
  * ----------------------------------------------------------------------------
  */
 
+#include <string>
 
+namespace GameWindows {
+	void Window::init(int ID, string title, int width, int height) {
+		lWindow = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED,
+				SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN,
+				SDL_WINDOW_RESIZABLE);
+		LOG_IF(!lwindow, ERROR) << "Cannot create a new window";
+	}
+}
