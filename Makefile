@@ -11,7 +11,7 @@ OBJS = $(patsubst %.cpp,%.o,$(SRCS))
 CXX = clang++
 
 # Libs to load TODO: OPENGL_PATH?
-LDLIBS = -lglut -lGLU -lGL -lGLEW -lm -lpthread
+LDLIBS = -lSDL2 -lGLU -lGL -lGLEW -lm -lpthread
 
 # Include directory
 INCDIR = Sources/

@@ -132,8 +132,10 @@ int main(int argc, char **argv) {
 	LOG(INFO) << "Ressources online";
 
 	// Init HID manager
+	LOG(DEBUG) << "Initializing HID manager";
 	gHIDManager = std::make_shared<HID::Manager>();
 	gHIDManager->init(gConfigManager);
+	LOG(INFO) << "HID manager online";
 
 	// Init GLUT and create window
 	glutInit(&argc, argv); 
