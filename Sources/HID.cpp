@@ -9,8 +9,7 @@
 
 #include <memory>
 #include <map>
-#include <string>
-#include <iostream>
+#include <SDL2/SDL.h>
 
 #include "Ressources/Config.h"
 
@@ -22,17 +21,26 @@ namespace HID {
 		keymap = localConfig->get_keymap();
 	}
 
-	void Manager::keyPressedCallback(unsigned char key, int x, int y) {
-		// TODO: Call the right observer depending on keybinding
-		std::cout << "Key " << key << " pressed, corresponds to "
-				  << keymap[key] << " event" << std::endl;
-	}
-
-	void Manager::specialKeyPressedCallback(int key, int x, int y) {
-		// TODO: Call the right observer depending on keybinding
-	}
-
-	void Manager::mouseEventCallback(int button, int state, int x, int y) {
-		// TODO: Call the right observer depending on keybinding
+	void Manager::check_for_inputs() {
+		// TODO: Treat the whole queue with corresponding keybinding
+		SDL_Event event;
+		while(SDL_PollEvent(&event)) {
+			// Events can be :
+			// - Mouse related :
+			// SDL_MOUSEMOTION, SDL_MOUSEBUTTONDOWN/UP, SDL_ACTIVEEVENT
+			//
+			// - Keyboard related :
+			// SDL_KEYDOWN/UP, 
+			//
+			// - Joystick related :
+			// SDL_JOYAXISMOTION, SDL_JOYBALLMOTION, SDL_JOYHATMOTION
+			// SDL_JOYBUTTONDOWN/UP
+			//
+			// - Window related :
+			// SDL_QUIT, SDL_SYSWMEVENT , SDL_VIDEORESIZE , SDL_VIDEOEXPOSE
+			//
+			// - Custom event :
+			// SDL_USEREVENT
+		}
 	}
 }

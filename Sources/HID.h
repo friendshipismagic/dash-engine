@@ -25,14 +25,8 @@ namespace HID {
 			// Initializer, if needed
 			void init(std::shared_ptr<Ressources::Config>);
 
-			// Keyboard event handler
-			void keyPressedCallback(unsigned char key, int x, int y);
-
-			// Special Keyboard event handler
-			void specialKeyPressedCallback(int key, int x, int y);
-
-			// Mouse event handler
-			void mouseEventCallback(int button, int state, int x, int y);
+			// Check for events
+			void check_for_inputs();
 
 		private:
 			// Key binding
