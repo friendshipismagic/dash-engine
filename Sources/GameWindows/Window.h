@@ -48,6 +48,9 @@ namespace GameWindows {
 			// Destructor, removes context and so on
 			void stop();
 
+			// Swap the buffers
+			void swapBuffers();
+
 			// ID getter
 			int getID() const {return ID;};
 

@@ -26,6 +26,10 @@ namespace GameWindows {
 		// sync buffer swap with monitor's vertical refresh rate
 		SDL_GL_SetSwapInterval(1);
 
+		// Limit to core profile to disable deprecated functions
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
+				SDL_GL_CONTEXT_PROFILE_CORE);
+
 		// Took from
 		// http://stackoverflow.com/questions/13826150/sdl2-opengl3-how-to-initialize-sdl-inside-a-function
 		// set the depth buffer to 24 bits
@@ -33,6 +37,7 @@ namespace GameWindows {
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
 		// Now create a window
+		// XXX: Bad guy, you shouldn't do that
 		{ // Create a local scope to be sure test will never be used again
 			std::unique_ptr<SDL_Window, sdl2::SDL_Deleter> test(
 					SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED,
@@ -41,7 +46,7 @@ namespace GameWindows {
 
 			lWindow = std::move(test);
 		}
-		//LOG_IF(lWindow == nullptr, ERROR) << "Cannot create a new window";
+		LOG_IF(lWindow == nullptr, ERROR) << "Cannot create a new window";
 
 		// Init pure GL part of context
 		LOG(DEBUG) << "Initializing OpenGL context";
@@ -51,6 +56,9 @@ namespace GameWindows {
 
 	// OpenGL context creation
 	void Window::gl_init_context() {
+		// Call a context creation
+		opengl_context = SDL_GL_CreateContext((SDL_Window*) lWindow.get());
+
 		// Enable experimental drivers
 		glewExperimental = GL_TRUE;
 
@@ -74,11 +82,19 @@ namespace GameWindows {
 		glLineWidth(2.0f);
 
 		// Black background
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		// Clear back buffer
+		glClear(GL_COLOR_BUFFER_BIT);
+		// Swap back and front buffers
+		swapBuffers();
 	}
 
 	void Window::stop() {
 		SDL_GL_DeleteContext(opengl_context);
 		// TODO: explicitly destruct the unique_ptr ? SDL_DestroyWindow(lWindow);
+	}
+
+	void Window::swapBuffers() {
+		SDL_GL_SwapWindow(lWindow.get());
 	}
 }
