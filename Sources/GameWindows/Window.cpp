@@ -8,6 +8,7 @@
  */
 
 #include <string>
+#include <cstdint>
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include <memory>
@@ -36,12 +37,16 @@ namespace GameWindows {
 		// you may need to change this to 16 or 32 for your system
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
+		// Set window flags
+		// Mandatory flag is SDL_WINDOW_OPENGL
+		Uint32 flags = SDL_WINDOW_OPENGL;
+
 		// Now create a window
 		// XXX: Bad guy, you shouldn't do that
 		{ // Create a local scope to be sure test will never be used again
 			std::unique_ptr<SDL_Window, sdl2::SDL_Deleter> test(
 					SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED,
-					SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_OPENGL),
+					SDL_WINDOWPOS_UNDEFINED, width, height, flags),
 					sdl2::SDL_Deleter());
 
 			lWindow = std::move(test);
