@@ -64,7 +64,6 @@ namespace GameWindows {
 			int ID;
 			// SDL Window
 			std::unique_ptr<SDL_Window, sdl2::SDL_Deleter> lWindow;
-			SDL_Window* window_test;
 			// OpenGL Context for window
 			SDL_GLContext opengl_context;
 			// Width and Height
