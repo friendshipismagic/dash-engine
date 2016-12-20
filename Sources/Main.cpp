@@ -32,20 +32,6 @@ std::shared_ptr<Ressources::Manager> gRessourcesManager;
 std::shared_ptr<Ressources::Config> gConfigManager;
 std::shared_ptr<GameWindows::Manager> gWindowManager;
 
-// Display callback.
-// called when possible to update the display
-//void display() {
-//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//
-//	glBegin(GL_TRIANGLES);
-//	glVertex3f(-0.5,-0.5,0.0);
-//	glVertex3f(0.5,0.0,0.0);
-//	glVertex3f(0.0,0.5,0.0);
-//	glEnd();
-//
-//	glutSwapBuffers();
-//}
-
 // Macro used by easylogging for initializing the logging system
 INITIALIZE_EASYLOGGINGPP
 
