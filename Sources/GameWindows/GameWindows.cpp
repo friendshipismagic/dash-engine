@@ -7,12 +7,19 @@
  * ----------------------------------------------------------------------------
  */
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
+#include <string>
+#include <vector>
 
+#include "easylogging++.h"
+#include "GameWindows/Window.h"
 #include "GameWindows.h"
 
 namespace GameWindows {
-	void Manager::init() {
+	void Manager::init(std::shared_ptr<Ressources::Config> configManager) {
+		// Get Config Manager
+		gConfigManager = configManager;
+
 		// Init HID manager
 		LOG(DEBUG) << "Initializing HID manager";
 		gHIDManager = std::make_shared<HID::Manager>();
@@ -26,16 +33,20 @@ namespace GameWindows {
 		if(sdl_failure)
 			return;
 		// TODO: Throw exception
-
-		// Init OpenGL context
-		LOG(DEBUG) << "Initializing OpenGL context";
-		gl_init_context();
-		LOG(DEBUG) << "OpenGL context ready";
 	}
 
-	int Manager::create_game_window() {
+	void Manager::stop() {
+		SDL_Quit();
+	}
+
+	int Manager::create_game_window(std::string title) {
 		// Find a suitable ID (non-zero for safety) and instanciate a
 		// GameWindows::Window object
 		// TODO
+		std::shared_ptr<GameWindows::Window> win;
+		win->init(max_id, title, 800, 600);
+		windowslist.push_back(win);
+		max_id++;
+		return max_id-1;
 	}
 }

@@ -10,6 +10,19 @@
 #pragma once
 
 #include <string>
+#include <SDL2/SDL.h>
+
+// SDL Deleter for smart pointers
+// Thanks to http://swarminglogic.com/jotting/2015_05_smartwrappers
+namespace sdl2 {
+	struct SDL_Deleter {
+		void operator()(SDL_Surface*  ptr) { if (ptr) SDL_FreeSurface(ptr); }
+		void operator()(SDL_Texture*  ptr) { if (ptr) SDL_DestroyTexture(ptr); }
+		void operator()(SDL_Renderer* ptr) { if (ptr) SDL_DestroyRenderer(ptr); }
+		void operator()(SDL_Window*   ptr) { if (ptr) SDL_DestroyWindow(ptr); }
+		void operator()(SDL_RWops*    ptr) { if (ptr) SDL_RWclose(ptr); }
+	};
+}
 
 namespace GameWindows {
 	class Window {
@@ -20,7 +33,13 @@ namespace GameWindows {
 			~Window() {};
 
 			// Initializer, needs a unique ID and a title
-			void init(int ID, string title, int width, int height);
+			void init(int ID, std::string title, int width, int height);
+
+			// Destructor, removes context and so on
+			void stop();
+
+			// ID getter
+			int getID() const {return ID;};
 
 			// Attach an adapter to plug to the HID Manager
 			void attach(); // TODO: Adapters
@@ -28,12 +47,18 @@ namespace GameWindows {
 			// Detach an adapter
 			void detach(); // TODO: Adapters
 		private:
+			// OpenGL Context initializer
+			void gl_init_context();
+
 			// Window ID
 			int ID;
 			// SDL Window
-			SDL_Window* lWindow;
+			std::unique_ptr<SDL_Window, sdl2::SDL_Deleter> lWindow;
+			SDL_Window* window_test;
+			// OpenGL Context for window
+			SDL_GLContext opengl_context;
 			// Width and Height
-			int width = 800
+			int width = 800;
 			int height = 600;
 	};
 }

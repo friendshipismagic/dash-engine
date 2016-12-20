@@ -17,14 +17,11 @@
 // GL Related includes
 #include <GL/glew.h>
 
-// Window Manager
-#include <GL/freeglut.h>
-
 // GLSL-Like lib
 #include <glm/glm.hpp>
 
-// HID Manager lib
-#include "HID.h"
+// Window Manager lib
+#include "GameWindows/GameWindows.h"
 
 // Config Manager lib
 #include "Ressources/Ressources.h"
@@ -33,81 +30,21 @@
 // Managers
 std::shared_ptr<Ressources::Manager> gRessourcesManager;
 std::shared_ptr<Ressources::Config> gConfigManager;
-std::shared_ptr<HID::Manager> gHIDManager;
-
-// Reshape callback.
-// Called when a reshape of the window is happening
-void reshape(int width, int height) {
-}
+std::shared_ptr<GameWindows::Manager> gWindowManager;
 
 // Display callback.
 // called when possible to update the display
-void display() {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glBegin(GL_TRIANGLES);
-	glVertex3f(-0.5,-0.5,0.0);
-	glVertex3f(0.5,0.0,0.0);
-	glVertex3f(0.0,0.5,0.0);
-	glEnd();
-
-	glutSwapBuffers();
-}
-
-// Motion callback.
-// Called when a mouse drag happens
-void motion(int x, int y) {
-}
-
-// Idle callback.
-// Called when nothing else is called
-void idle() {
-}
-
-// OpenGL context creation
-void gl_init_context() {
-	// Enable experimental drivers
-	glewExperimental = GL_TRUE;
-
-	// Init GLEW
-	GLenum err = glewInit();
-	if(err != GLEW_OK) {
-		// Oops, GLEW failed to start
-		std::cerr << "GLEW Fatal error: "
-			<< glewGetErrorString(err) << std::endl;
-	}
-
-	// Back face culling
-	glCullFace(GL_BACK);
-	glEnable(GL_CULL_FACE);
-
-	// Less depth test for z-buffer
-	glEnable(GL_DEPTH_TEST);
-
-	// Force normalization
-	glEnable(GL_NORMALIZE);
-
-	// Set the basic line width to be 2px
-	glLineWidth(2.0f);
-
-	// Black background
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-}
-
-// This function should just call the HID manager
-void keyPressedCallback(unsigned char key, int x, int y) {
-	gHIDManager->keyPressedCallback(key, x, y);
-}
-
-// This function should just call the HID manager
-void specialKeyPressedCallback(int key, int x, int y) {
-	gHIDManager->specialKeyPressedCallback(key, x, y);
-}
-
-// This function should just call the HID manager
-void mouseEventCallback(int button, int state, int x, int y) {
-	gHIDManager->mouseEventCallback(button, state, x, y);
-}
+//void display() {
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//	glBegin(GL_TRIANGLES);
+//	glVertex3f(-0.5,-0.5,0.0);
+//	glVertex3f(0.5,0.0,0.0);
+//	glVertex3f(0.0,0.5,0.0);
+//	glEnd();
+//
+//	glutSwapBuffers();
+//}
 
 // Macro used by easylogging for initializing the logging system
 INITIALIZE_EASYLOGGINGPP
@@ -131,35 +68,15 @@ int main(int argc, char **argv) {
 	gConfigManager->init(gRessourcesManager);
 	LOG(INFO) << "Ressources online";
 
-	// Init HID manager
-	LOG(DEBUG) << "Initializing HID manager";
-	gHIDManager = std::make_shared<HID::Manager>();
-	gHIDManager->init(gConfigManager);
-	LOG(INFO) << "HID manager online";
-
-	// Init GLUT and create window
-	glutInit(&argc, argv); 
-	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowSize(800, 600);
-	glutCreateWindow("IGR202");
-
-	// Init OpenGL context
-	gl_init_context();
-
-	// Register callbacks
-	LOG(INFO) << "Registering callbacks";
-	glutKeyboardFunc(keyPressedCallback);
-	glutMouseFunc(mouseEventCallback);
-	glutSpecialFunc(specialKeyPressedCallback);
-	glutReshapeFunc(reshape);
-	glutDisplayFunc(display);
-	glutMotionFunc(motion);
-	glutIdleFunc(idle);
-
+	// Init Window manager
+	LOG(DEBUG) << "Initializing Window manager";
+	gWindowManager = std::make_shared<GameWindows::Manager>();
+	gWindowManager->init(gConfigManager);
+	LOG(INFO) << "Windowing system online";
+	gWindowManager->create_game_window("Dash Engine");
 	LOG(INFO) << "All systems online, ready to enter the game loop";
 
 	// enter GLUT event processing cycle
-	glutMainLoop();
-
+	while(1) {}
 	return 0;
 }

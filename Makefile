@@ -20,7 +20,7 @@ INCDIR = Sources/
 CPPFLAGS += -MMD -MP -I$(INCDIR)
 
 # C++ Flags
-CXXFLAGS = -std=c++14 -Wall -O2 -g -pthread
+CXXFLAGS = -std=c++14 -Wall -O0 -g -pthread
 
 # For linker to understand it's C++
 LINK.o=$(LINK.cpp)

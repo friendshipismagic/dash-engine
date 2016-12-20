@@ -9,6 +9,10 @@
 
 #pragma once
 
+#include <string>
+#include <vector>
+
+#include "GameWindows/Window.h"
 #include "HID.h"
 
 namespace GameWindows {
@@ -20,18 +24,25 @@ namespace GameWindows {
 			~Manager() {};
 
 			// Initializer
-			void init();
+			void init(std::shared_ptr<Ressources::Config>);
+
+			// Destructor, call SDL_quit
+			void stop();
 
 			// Create a new window, returning its ID
-			int create_game_window();
+			int create_game_window(std::string title);
 
 			// Destroy a window with specified ID
 			void close_game_window(int id);
 
 		private:
 			// List of currently in-use windows
-			std::vector<GameWindows::Window> windowslist;
+			std::vector<std::shared_ptr<GameWindows::Window>> windowslist;
+			// Global HID Manager
+			std::shared_ptr<Ressources::Config> gConfigManager;
 			// Global HID Manager
 			std::shared_ptr<HID::Manager> gHIDManager;
+			// Current max ID for windows
+			int max_id = 0;
 	};
 }
