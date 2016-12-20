@@ -43,7 +43,8 @@ namespace GameWindows {
 		// Find a suitable ID (non-zero for safety) and instanciate a
 		// GameWindows::Window object
 		// TODO
-		std::shared_ptr<GameWindows::Window> win;
+		std::shared_ptr<GameWindows::Window> win =
+			std::make_shared<GameWindows::Window>();
 		win->init(max_id, title, 800, 600);
 		windowslist.push_back(win);
 		max_id++;
