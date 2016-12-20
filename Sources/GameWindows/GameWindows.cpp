@@ -13,6 +13,7 @@
 
 #include "easylogging++.h"
 #include "GameWindows/Window.h"
+#include "GameWindows/HID.h"
 #include "GameWindows.h"
 
 namespace GameWindows {

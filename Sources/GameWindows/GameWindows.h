@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "GameWindows/Window.h"
-#include "HID.h"
+#include "GameWindows/HID.h"
 
 namespace GameWindows {
 	class Manager {
