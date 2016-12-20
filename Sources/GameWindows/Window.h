@@ -16,19 +16,29 @@
 // Thanks to http://swarminglogic.com/jotting/2015_05_smartwrappers
 namespace sdl2 {
 	struct SDL_Deleter {
-		void operator()(SDL_Surface*  ptr) { if (ptr) SDL_FreeSurface(ptr); }
-		void operator()(SDL_Texture*  ptr) { if (ptr) SDL_DestroyTexture(ptr); }
-		void operator()(SDL_Renderer* ptr) { if (ptr) SDL_DestroyRenderer(ptr); }
-		void operator()(SDL_Window*   ptr) { if (ptr) SDL_DestroyWindow(ptr); }
-		void operator()(SDL_RWops*    ptr) { if (ptr) SDL_RWclose(ptr); }
+		void operator()(SDL_Surface*  ptr) {
+			if (ptr != nullptr) SDL_FreeSurface(ptr);
+		}
+		void operator()(SDL_Texture*  ptr) {
+			if (ptr != nullptr) SDL_DestroyTexture(ptr);
+		}
+		void operator()(SDL_Renderer* ptr) {
+			if (ptr != nullptr) SDL_DestroyRenderer(ptr);
+		}
+		void operator()(SDL_Window* ptr) {
+			if (ptr != nullptr) SDL_DestroyWindow(ptr);
+		}
+		void operator()(SDL_RWops* ptr) {
+			if (ptr != nullptr) SDL_RWclose(ptr);
+		}
 	};
 }
 
 namespace GameWindows {
 	class Window {
 		public:
-			// Default Constructor, should not do anything
-			Window() {};
+			// Default Constructor, should just initalize lWindow to nullptr
+			Window() : lWindow(nullptr) {};
 			// Default destructor, should not do anything
 			~Window() {};
 
