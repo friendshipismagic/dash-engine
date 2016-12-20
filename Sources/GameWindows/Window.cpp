@@ -39,7 +39,15 @@ namespace GameWindows {
 
 		// Set window flags
 		// Mandatory flag is SDL_WINDOW_OPENGL
-		Uint32 flags = SDL_WINDOW_OPENGL;
+		Uint32 flags = SDL_WINDOW_OPENGL |
+			SDL_WINDOW_SHOWN |
+			SDL_WINDOW_BORDERLESS |
+			SDL_WINDOW_MAXIMIZED |
+			SDL_WINDOW_INPUT_GRABBED |
+			SDL_WINDOW_INPUT_FOCUS |
+			SDL_WINDOW_MOUSE_FOCUS |
+			SDL_WINDOW_ALLOW_HIGHDPI |
+			SDL_WINDOW_MOUSE_CAPTURE;
 
 		// Now create a window
 		// XXX: Bad guy, you shouldn't do that
