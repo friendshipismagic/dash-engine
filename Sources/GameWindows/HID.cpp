@@ -48,7 +48,7 @@ namespace HID {
 		}
 	}
 
-	void Manager::connect_adapter(std::shared_ptr<HID::HIDAdapter> adapter) {
+	void Manager::connect_adapter(std::shared_ptr<HIDAdapter> adapter) {
 		// Add only if it does not already exists
 		if(std::find(adapter_list.begin(), adapter_list.end(), adapter)
 				== adapter_list.end())
