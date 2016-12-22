@@ -9,9 +9,11 @@
 
 #include <memory>
 #include <map>
+#include <algorithm>
 #include <SDL2/SDL.h>
 
 #include "Ressources/Config.h"
+#include "GameWindows/HIDAdapter.h"
 
 #include "HID.h"
 

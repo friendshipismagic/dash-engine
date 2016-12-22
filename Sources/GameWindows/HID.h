@@ -10,9 +10,11 @@
 #pragma once
 
 #include <map>
+#include <vector>
 #include <string>
 
 #include "Ressources/Config.h"
+#include "GameWindows/HIDAdapter.h"
 
 namespace HID {
 	class Manager {
