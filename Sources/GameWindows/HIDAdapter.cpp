@@ -28,13 +28,6 @@ namespace HID {
 			reg_wins.push_back(win);
 	}
 
-	void Keyboard_Adapter::connect_HID(
-			std::shared_ptr<HID::Manager> manager) {
-		// Add only if it does not already exists
-		if(std::find(reg_hid.begin(), reg_hid.end(), manager) == reg_hid.end())
-			reg_hid.push_back(manager);
-	}
-
 	void Keyboard_Adapter::add_events(
 			std::vector<std::string> events) {
 		// Add only if it does not already exists
@@ -42,7 +35,6 @@ namespace HID {
 			if(std::find(reg_events.begin(), reg_events.end(), event) == reg_events.end())
 				reg_events.push_back(event);
 	}
-
 
 	void Keyboard_Adapter::remove_events(
 			std::vector<std::string> events) {

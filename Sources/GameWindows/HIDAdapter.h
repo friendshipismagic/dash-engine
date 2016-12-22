@@ -27,19 +27,20 @@ namespace HID {
 			// Connect to Window
 			void connect_window(std::shared_ptr<GameWindows::Window>);
 
-			// Connect to HID manager
-			void connect_HID(std::shared_ptr<HID::Manager>);
-
 			// Add events to catch
 			void add_events(std::vector<std::string>);
 
 			// Remove events to catch
 			void remove_events(std::vector<std::string>);
+
+			// Add an event to catch immediatly
+			// WARNING: To be used only by the HID Manager
+			void parse_event(std::string);
+
 		private:
 			// List of registered windows
 			std::vector<std::shared_ptr<GameWindows::Window>> reg_wins;
-			// List of registered HID managers
-			std::vector<std::shared_ptr<HID::Manager>> reg_hid;
+
 			// List of registered events to catch
 			std::vector<std::string> reg_events;
 	};
