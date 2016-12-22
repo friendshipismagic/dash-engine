@@ -16,7 +16,7 @@
 #include "GameWindows/HIDAdapter.h"
 
 namespace HID {
-	Keyboard_Adapter::init() {
+	void Keyboard_Adapter::init() {
 		// TODO: Actually does not do anything
 	}
 

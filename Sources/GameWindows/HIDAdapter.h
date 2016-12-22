@@ -21,7 +21,7 @@ namespace HID {
 			~Keyboard_Adapter() {};
 
 			// Initalizer
-			init();
+			void init();
 
 			// Connect to Window
 			void connect_window(std::shared_ptr<GameWindows::Window>);
