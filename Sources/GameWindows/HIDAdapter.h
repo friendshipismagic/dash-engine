@@ -14,7 +14,6 @@
 #include <vector>
 
 #include "GameWindows/Window.h"
-#include "GameWindows/HID.h"
 
 namespace HID {
 	class HIDAdapter {
