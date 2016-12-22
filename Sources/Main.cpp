@@ -22,15 +22,20 @@
 
 // Window Manager lib
 #include "GameWindows/GameWindows.h"
+#include "GameWindows/HID.h"
 
 // Config Manager lib
 #include "Ressources/Ressources.h"
 #include "Ressources/Config.h"
 
+// Main Game Loop
+#include "GameLoop.h"
+
 // Managers
 std::shared_ptr<Ressources::Manager> gRessourcesManager;
 std::shared_ptr<Ressources::Config> gConfigManager;
 std::shared_ptr<GameWindows::Manager> gWindowManager;
+std::shared_ptr<GameLoop> gGameLoop;
 
 // Macro used by easylogging for initializing the logging system
 INITIALIZE_EASYLOGGINGPP
@@ -46,7 +51,6 @@ void setupGame() {
 	// Add them to adapter and connect it to main window
 	int exit_adapter = gWindowManager->create_adapter(events);
 	gWindowManager->connect_adapter(exit_adapter, main_windows);
-
 }
 
 // Here we begin.
@@ -79,8 +83,14 @@ int main(int argc, char **argv) {
 	setupGame();
 	LOG(INFO) << "All systems online, ready to enter the game loop";
 
+	// Instanciate the game loop
+	gGameLoop = std::make_shared<GameLoop>();
+	gGameLoop->init(1000000); // 1s fixed time update
+	gGameLoop->connect_HID(gWindowManager->getHID());
 
-	// enter GLUT event processing cycle
-	while(1) {}
+	// enter event processing cycle
+	LOG(DEBUG) << "Entering game loop, goodbye!";
+	gGameLoop->loop();
+
 	return 0;
 }

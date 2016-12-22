@@ -12,12 +12,15 @@
 #include <thread>
 
 #include "GameWindows/HID.h"
+#include "easylogging++.h"
 
 #include "GameLoop.h"
 
 void GameLoop::init(int ts) {
 	// Update the main timestep
 	main_ts = ts;
+	last_update = input_time = game_update_time = render_time =
+		std::chrono::high_resolution_clock::now();
 }
 
 void GameLoop::connect_HID(std::shared_ptr<HID::Manager> gHIDManager) {
@@ -26,36 +29,44 @@ void GameLoop::connect_HID(std::shared_ptr<HID::Manager> gHIDManager) {
 }
 
 void GameLoop::loop() {
-	// Process the inputs
-	lHIDManager->check_for_inputs();
+	while(1) {
+		// Process the inputs
+		LOG(DEBUG) << "Processing inputs";
+		lHIDManager->check_for_inputs();
 
-	// Time to process the inputs
-	input_time = std::chrono::high_resolution_clock::now();
-	elapsed_input_time = std::chrono::duration_cast<std::chrono::microseconds>
-		(input_time - last_update).count();
+		// Time to process the inputs
+		input_time = std::chrono::high_resolution_clock::now();
+		elapsed_input_time = std::chrono::duration_cast<std::chrono::microseconds>
+			(input_time - last_update).count();
 
-	// Update the game, ad we know how many time is left before the displaying
-	// to the user, we can update the game to now + time to render
-	// TODO: Implement game update - (Physics + Animation)
+		// Update the game, ad we know how many time is left before the displaying
+		// to the user, we can update the game to now + time to render
+		// TODO: Implement game update - (Physics + Animation)
+		LOG(DEBUG) << "Updating the game";
 
-	// Time to update the game
-	game_update_time = std::chrono::high_resolution_clock::now();
-	elapsed_game_update_time = std::chrono::duration_cast<std::chrono::microseconds>
-		(input_time - game_update_time).count();
+		// Time to update the game
+		game_update_time = std::chrono::high_resolution_clock::now();
+		elapsed_game_update_time = std::chrono::duration_cast<std::chrono::microseconds>
+			(input_time - game_update_time).count();
 
-	// Render (variable rendering)
-	// TODO: Implement the render engine
+		// Render (variable rendering)
+		// TODO: Implement the render engine
+		LOG(DEBUG) << "Rendering image";
 
-	// Time to render
-	render_time = std::chrono::high_resolution_clock::now();
-	elapsed_render_time = std::chrono::duration_cast<std::chrono::microseconds>
-		(game_update_time - render_time).count();
+		// Time to render
+		render_time = std::chrono::high_resolution_clock::now();
+		elapsed_render_time = std::chrono::duration_cast<std::chrono::microseconds>
+			(game_update_time - render_time).count();
 
-	// Wait for next update (fixed time step)
-	total_elapsed = std::chrono::duration_cast<std::chrono::microseconds>
-		(render_time - last_update).count();
-	std::this_thread::sleep_for(std::chrono::microseconds(main_ts - total_elapsed));
+		// Wait for next update (fixed time step)
+		total_elapsed = std::chrono::duration_cast<std::chrono::microseconds>
+			(render_time - last_update).count();
+		LOG(DEBUG) << "Waiting for " << main_ts - total_elapsed << " us";
+		std::this_thread::sleep_for(std::chrono::microseconds(main_ts - total_elapsed));
 
-	// Update last_update time
-	last_update = std::chrono::high_resolution_clock::now();
+		// Update last_update time
+		last_update = std::chrono::high_resolution_clock::now();
+
+		// Go back to loop
+	}
 }

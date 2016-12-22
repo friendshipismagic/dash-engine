@@ -42,6 +42,9 @@ namespace GameWindows {
 			// Connect an adapter with a window
 			void connect_adapter(int adapter, int win);
 
+			// Get the HID Manager for the Game loop
+			std::shared_ptr<HID::Manager> getHID() const { return gHIDManager; };
+
 		private:
 			// List of currently in-use windows
 			std::vector<std::shared_ptr<GameWindows::Window>> windowslist;
