@@ -11,6 +11,7 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 namespace HID {
 	class Keyboard_Adapter {

@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <algorithm>
+#include <vector>
 
 #include "GameWindows/Window.h"
 #include "GameWindows/HID.h"
