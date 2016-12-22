@@ -39,6 +39,8 @@ namespace HID {
 			// WARNING: To be used only by the HID Manager
 			void parse_event(std::string);
 
+			// Getter
+			int getID() const {return ID;};
 		private:
 			// ID
 			int ID = 0;

@@ -55,12 +55,27 @@ namespace GameWindows {
 
 	int Manager::create_adapter(std::vector<std::string> events) {
 		// Add the adapter to adapterslist
-		std::shared_ptr<HID::HIDAdapter>> adapter =
+		std::shared_ptr<HID::HIDAdapter> adapter =
 			std::make_shared<HID::HIDAdapter>();
 		adapter->init(ada_max_id);
 		adapter->add_events(events);
-		windowslist.push_back(adapter);
+		adapterslist.push_back(adapter);
 		ada_max_id++;
 		return ada_max_id-1;
+	}
+
+	void Manager::connect_adapter(int adapter, int win) {
+		// Get corresponding adapter
+		std::shared_ptr<HID::HIDAdapter> cur_adapt;
+		for(auto adapt: adapterslist)
+			if(adapt->getID() == adapter)
+				cur_adapt = adapt;
+		// Get corresponding window
+		std::shared_ptr<GameWindows::Window> cur_win;
+		for(auto window: windowslist)
+			if(window->getID() == win)
+				cur_win = window;
+		// Now connect them!
+		cur_adapt->connect_window(cur_win);
 	}
 }
