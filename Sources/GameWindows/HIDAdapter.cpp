@@ -45,11 +45,12 @@ namespace HID {
 	}
 
 	void HIDAdapter::parse_event(std::string event) {
-		// First check event is to be treated
-		if(std::find(reg_events.begin(), reg_events.end(), event) == reg_events.end())
-			return;
 		// Now event should be sent to the windows that registered to it
-		// TODO
+		for(auto win: reg_wins) {
+			// First check event is to be treated
+			if(std::find(reg_events.begin(), reg_events.end(), event) != reg_events.end())
+				win->parse_event(event);
+		}
 	}
 
 }
