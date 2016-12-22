@@ -8,6 +8,9 @@
  */
 
 #include <memory>
+#include <chrono>
+#include <thread>
+
 #include "GameWindows/HID.h"
 
 #include "GameLoop.h"
@@ -23,5 +26,36 @@ void GameLoop::connect_HID(std::shared_ptr<HID::Manager> gHIDManager) {
 }
 
 void GameLoop::loop() {
+	// Process the inputs
+	lHIDManager->check_for_inputs();
 
+	// Time to process the inputs
+	input_time = std::chrono::high_resolution_clock::now();
+	elapsed_input_time = std::chrono::duration_cast<std::chrono::microseconds>
+		(input_time - last_update).count();
+
+	// Update the game, ad we know how many time is left before the displaying
+	// to the user, we can update the game to now + time to render
+	// TODO: Implement game update - (Physics + Animation)
+
+	// Time to update the game
+	game_update_time = std::chrono::high_resolution_clock::now();
+	elapsed_game_update_time = std::chrono::duration_cast<std::chrono::microseconds>
+		(input_time - game_update_time).count();
+
+	// Render (variable rendering)
+	// TODO: Implement the render engine
+
+	// Time to render
+	render_time = std::chrono::high_resolution_clock::now();
+	elapsed_render_time = std::chrono::duration_cast<std::chrono::microseconds>
+		(game_update_time - render_time).count();
+
+	// Wait for next update (fixed time step)
+	total_elapsed = std::chrono::duration_cast<std::chrono::microseconds>
+		(render_time - last_update).count();
+	std::this_thread::sleep_for(std::chrono::microseconds(main_ts - total_elapsed));
+
+	// Update last_update time
+	last_update = std::chrono::high_resolution_clock::now();
 }
