@@ -54,11 +54,8 @@ namespace GameWindows {
 			// ID getter
 			int getID() const {return ID;};
 
-			// Attach an adapter to plug to the HID Manager
-			void attach(); // TODO: Adapters
-
-			// Detach an adapter
-			void detach(); // TODO: Adapters
+			// Parse the event from the adapter we're registered from
+			void parse_event(std::string event);
 		private:
 			// OpenGL Context initializer
 			void gl_init_context();
