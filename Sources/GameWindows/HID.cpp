@@ -29,24 +29,50 @@ namespace HID {
 		// TODO: Treat the whole queue with corresponding keybinding
 		SDL_Event event;
 		while(SDL_PollEvent(&event)) {
+			switch(event.type) {
 			// Events can be :
 			// - Mouse related :
 			// SDL_MOUSEMOTION, SDL_MOUSEBUTTONDOWN/UP, SDL_ACTIVEEVENT
-			//
+				case SDL_MOUSEMOTION:
+					break;
+				case SDL_MOUSEBUTTONDOWN:
+					break;
+				case SDL_MOUSEBUTTONUP:
+					break;
+				//case SDL_ACTIVEEVENT:
+				//	break;
+
 			// - Keyboard related :
 			// SDL_KEYDOWN/UP, 
-			//
+				case SDL_KEYDOWN:
+					LOG(DEBUG) << "Got event! Key: " << event.key.keysym.unicode;
+					
+					break;
+				case SDL_KEYUP:
+					break;
+
 			// - Joystick related :
 			// SDL_JOYAXISMOTION, SDL_JOYBALLMOTION, SDL_JOYHATMOTION
 			// SDL_JOYBUTTONDOWN/UP
-			//
+			// Not used
+
 			// - Window related :
 			// SDL_QUIT, SDL_SYSWMEVENT , SDL_VIDEORESIZE , SDL_VIDEOEXPOSE
-			//
+				case SDL_QUIT:
+					break;
+				case SDL_SYSWMEVENT:
+					break;
+			//	case SDL_VIDEORESIZE:
+			//		break;
+			//	case SDL_VIDEOEXPOSE:
+			//		break;
+
 			// - Custom event :
 			// SDL_USEREVENT
-			//
+				case SDL_USEREVENT:
+					break;
 			// Event to use is "HID::HIDAdapter::parse_event(std::string event)"
+			}
 		}
 	}
 
