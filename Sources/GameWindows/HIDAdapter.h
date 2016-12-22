@@ -10,6 +10,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 namespace HID {
 	class Keyboard_Adapter {
@@ -33,5 +34,12 @@ namespace HID {
 
 			// Remove events to catch
 			void remove_events(std::vector<std::string>);
+		private:
+			// List of registered windows
+			std::vector<std::shared_ptr<GameWindows::Window>> reg_wins;
+			// List of registered HID managers
+			std::vector<std::shared_ptr<HID::Manager>> reg_hid;
+			// List of registered events to catch
+			std::vector<std::string> reg_events;
 	};
 }
