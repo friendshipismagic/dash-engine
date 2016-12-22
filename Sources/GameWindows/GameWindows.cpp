@@ -14,6 +14,7 @@
 #include "easylogging++.h"
 #include "GameWindows/Window.h"
 #include "GameWindows/HID.h"
+#include "GameWindows/HIDAdapter.h"
 #include "GameWindows.h"
 
 namespace GameWindows {
@@ -46,9 +47,20 @@ namespace GameWindows {
 		// TODO
 		std::shared_ptr<GameWindows::Window> win =
 			std::make_shared<GameWindows::Window>();
-		win->init(max_id, title, 800, 600);
+		win->init(win_max_id, title, 800, 600);
 		windowslist.push_back(win);
-		max_id++;
-		return max_id-1;
+		win_max_id++;
+		return win_max_id-1;
+	}
+
+	int Manager::create_adapter(std::vector<std::string> events) {
+		// Add the adapter to adapterslist
+		std::shared_ptr<HID::HIDAdapter>> adapter =
+			std::make_shared<HID::HIDAdapter>();
+		adapter->init(ada_max_id);
+		adapter->add_events(events);
+		windowslist.push_back(adapter);
+		ada_max_id++;
+		return ada_max_id-1;
 	}
 }

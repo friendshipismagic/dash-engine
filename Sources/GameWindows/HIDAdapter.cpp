@@ -18,8 +18,9 @@
 #include "GameWindows/HIDAdapter.h"
 
 namespace HID {
-	void HIDAdapter::init() {
-		// TODO: Actually does not do anything
+	void HIDAdapter::init(int id) {
+		// Save the ID
+		this->ID = id;
 	}
 
 	void HIDAdapter::connect_window(

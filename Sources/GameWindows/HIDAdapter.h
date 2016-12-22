@@ -24,7 +24,7 @@ namespace HID {
 			~HIDAdapter() {};
 
 			// Initalizer
-			void init();
+			void init(int);
 
 			// Connect to Window
 			void connect_window(std::shared_ptr<GameWindows::Window>);
@@ -40,6 +40,9 @@ namespace HID {
 			void parse_event(std::string);
 
 		private:
+			// ID
+			int ID = 0;
+
 			// List of registered windows
 			std::vector<std::shared_ptr<GameWindows::Window>> reg_wins;
 

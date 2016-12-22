@@ -14,6 +14,7 @@
 
 #include "GameWindows/Window.h"
 #include "GameWindows/HID.h"
+#include "GameWindows/HIDAdapter.h"
 
 namespace GameWindows {
 	class Manager {
@@ -35,6 +36,12 @@ namespace GameWindows {
 			// Destroy a window with specified ID
 			void close_game_window(int id);
 
+			// Instanciate a new adapter
+			int create_adapter(std::vector<std::string> events);
+
+			// Connect an adapter with a window
+			void connect_adapter(int adapter, int win);
+
 		private:
 			// List of currently in-use windows
 			std::vector<std::shared_ptr<GameWindows::Window>> windowslist;
@@ -42,7 +49,11 @@ namespace GameWindows {
 			std::shared_ptr<Ressources::Config> gConfigManager;
 			// Global HID Manager
 			std::shared_ptr<HID::Manager> gHIDManager;
+			// Adapters
+			std::vector<std::shared_ptr<HID::HIDAdapter>> adapterslist;
 			// Current max ID for windows
-			int max_id = 0;
+			int win_max_id = 0;
+			// Current max ID for adapters
+			int ada_max_id = 0;
 	};
 }
