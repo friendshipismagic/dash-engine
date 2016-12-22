@@ -37,6 +37,9 @@ namespace GameWindows {
 		// you may need to change this to 16 or 32 for your system
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
+		// Force relative mouse, making the mouse always centered
+		SDL_SetRelativeMouseMode(SDL_TRUE);
+
 		// Set window flags
 		// Mandatory flag is SDL_WINDOW_OPENGL
 		Uint32 flags = SDL_WINDOW_OPENGL |
