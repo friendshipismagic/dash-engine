@@ -28,8 +28,12 @@ namespace HID {
 			// Check for events
 			void check_for_inputs();
 
+			// Connect to Adapter
+			void connect_adapter(std::shared_ptr<HID::HIDAdapter>);
 		private:
 			// Key binding
 			std::map<char, std::string> keymap;
+			// List of adapters
+			std::vector<std::shared_ptr<HID::HIDAdapter>> adapter_list;
 	};
 }

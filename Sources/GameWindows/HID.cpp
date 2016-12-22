@@ -41,6 +41,15 @@ namespace HID {
 			//
 			// - Custom event :
 			// SDL_USEREVENT
+			//
+			// Event to use is "HID::HIDAdapter::parse_event(std::string event)"
 		}
+	}
+
+	void Manager::connect_adapter(std::shared_ptr<HID::HIDAdapter> adapter) {
+		// Add only if it does not already exists
+		if(std::find(adapter_list.begin(), adapter_list.end(), adapter)
+				== adapter_list.end())
+			adapter_list.push_back(adapter);
 	}
 }
