@@ -14,12 +14,12 @@
 #include <vector>
 
 namespace HID {
-	class Keyboard_Adapter {
+	class HIDAdapter {
 		public:
 			// Default constructor, should not do anything
-			Keyboard_Adapter() {};
+			HIDAdapter() {};
 			// Default destructor, should not do anything
-			~Keyboard_Adapter() {};
+			~HIDAdapter() {};
 
 			// Initalizer
 			void init();

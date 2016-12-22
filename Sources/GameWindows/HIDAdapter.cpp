@@ -17,18 +17,18 @@
 #include "GameWindows/HIDAdapter.h"
 
 namespace HID {
-	void Keyboard_Adapter::init() {
+	void HIDAdapter::init() {
 		// TODO: Actually does not do anything
 	}
 
-	void Keyboard_Adapter::connect_window(
+	void HIDAdapter::connect_window(
 			std::shared_ptr<GameWindows::Window> win) {
 		// Add only if it does not already exists
 		if(std::find(reg_wins.begin(), reg_wins.end(), win) == reg_wins.end())
 			reg_wins.push_back(win);
 	}
 
-	void Keyboard_Adapter::add_events(
+	void HIDAdapter::add_events(
 			std::vector<std::string> events) {
 		// Add only if it does not already exists
 		for(auto event: events)
@@ -36,12 +36,20 @@ namespace HID {
 				reg_events.push_back(event);
 	}
 
-	void Keyboard_Adapter::remove_events(
+	void HIDAdapter::remove_events(
 			std::vector<std::string> events) {
 		for(auto event: events)
 			reg_events.erase(std::remove(
 						reg_events.begin(), reg_events.end(), event),
 					reg_events.end());
+	}
+
+	void HIDAdapter::parse_event(std::string event) {
+		// First check event is to be treated
+		if(std::find(reg_events.begin(), reg_events.end(), event) == reg_events.end())
+			return;
+		// Now event should be sent to the windows that registered to it
+		// TODO
 	}
 
 }
