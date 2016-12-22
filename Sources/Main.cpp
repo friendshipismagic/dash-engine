@@ -35,6 +35,20 @@ std::shared_ptr<GameWindows::Manager> gWindowManager;
 // Macro used by easylogging for initializing the logging system
 INITIALIZE_EASYLOGGINGPP
 
+// Setup the main game structure
+void setupGame() {
+	int main_windows = gWindowManager->create_game_window("Dash Engine");
+
+	// Make a list of events to catch in the window
+	std::vector<std::string> events;
+	events.push_back("Exit");
+
+	// Add them to adapter and connect it to main window
+	int exit_adapter = gWindowManager->create_adapter(events);
+	gWindowManager->connect_adapter(exit_adapter, main_windows);
+
+}
+
 // Here we begin.
 // Start the FreeGLUT window manager
 int main(int argc, char **argv) {
@@ -59,8 +73,12 @@ int main(int argc, char **argv) {
 	gWindowManager = std::make_shared<GameWindows::Manager>();
 	gWindowManager->init(gConfigManager);
 	LOG(INFO) << "Windowing system online";
-	gWindowManager->create_game_window("Dash Engine");
+
+	// Setup the game structure
+	LOG(DEBUG) << "Setting up game structure";
+	setupGame();
 	LOG(INFO) << "All systems online, ready to enter the game loop";
+
 
 	// enter GLUT event processing cycle
 	while(1) {}
