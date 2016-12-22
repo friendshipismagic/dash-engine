@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <vector>
 
+#include "easylogging++.h"
 #include "GameWindows/Window.h"
 #include "GameWindows/HID.h"
 
@@ -24,6 +25,7 @@ namespace HID {
 	void HIDAdapter::connect_window(
 			std::shared_ptr<GameWindows::Window> win) {
 		// Add only if it does not already exists
+		LOG(DEBUG) << "Connecting to window";
 		if(std::find(reg_wins.begin(), reg_wins.end(), win) == reg_wins.end())
 			reg_wins.push_back(win);
 	}
@@ -32,16 +34,20 @@ namespace HID {
 			std::vector<std::string> events) {
 		// Add only if it does not already exists
 		for(auto event: events)
-			if(std::find(reg_events.begin(), reg_events.end(), event) == reg_events.end())
+			if(std::find(reg_events.begin(), reg_events.end(), event) == reg_events.end()) {
+				LOG(DEBUG) << "Registering event " << event;
 				reg_events.push_back(event);
+			}
 	}
 
 	void HIDAdapter::remove_events(
 			std::vector<std::string> events) {
-		for(auto event: events)
+		for(auto event: events) {
+			LOG(DEBUG) << "Removing event " << event;
 			reg_events.erase(std::remove(
 						reg_events.begin(), reg_events.end(), event),
 					reg_events.end());
+		}
 	}
 
 	void HIDAdapter::parse_event(std::string event) {

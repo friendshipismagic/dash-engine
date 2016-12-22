@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <SDL2/SDL.h>
 
+#include "easylogging++.h"
 #include "Ressources/Config.h"
 #include "GameWindows/HIDAdapter.h"
 
@@ -20,6 +21,7 @@
 namespace HID {
 	void Manager::init(std::shared_ptr<Ressources::Config> localConfig) {
 		// Load the key binding
+		LOG(DEBUG) << "Loading Key map";
 		keymap = localConfig->get_keymap();
 	}
 
@@ -50,6 +52,7 @@ namespace HID {
 
 	void Manager::connect_adapter(std::shared_ptr<HIDAdapter> adapter) {
 		// Add only if it does not already exists
+		LOG(DEBUG) << "Connecting to adapter";
 		if(std::find(adapter_list.begin(), adapter_list.end(), adapter)
 				== adapter_list.end())
 			adapter_list.push_back(adapter);
