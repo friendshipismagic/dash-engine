@@ -64,18 +64,11 @@ namespace GameWindows {
 		return ada_max_id-1;
 	}
 
-	void Manager::connect_adapter(int adapter, int win) {
+	std::shared_ptr<HID::HIDAdapter> connect_adapter(int adapter) {
 		// Get corresponding adapter
 		std::shared_ptr<HID::HIDAdapter> cur_adapt;
 		for(auto adapt: adapterslist)
 			if(adapt->getID() == adapter)
-				cur_adapt = adapt;
-		// Get corresponding window
-		std::shared_ptr<GameWindows::Window> cur_win;
-		for(auto window: windowslist)
-			if(window->getID() == win)
-				cur_win = window;
-		// Now connect them!
-		cur_adapt->connect_window(cur_win);
+				return adapt;
 	}
 }

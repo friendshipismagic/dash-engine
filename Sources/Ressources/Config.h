@@ -12,6 +12,7 @@
 #include <string>
 #include <map>
 #include <memory>
+#include <SDL2/SDL.h>
 
 #include "Ressources/Ressources.h"
 
@@ -30,7 +31,7 @@ namespace Ressources {
 			void generate_default_config();
 
 			// Get keymap
-			std::map<char, std::string> get_keymap();
+			std::map<SDL_Scancode, std::string> get_keymap();
 
 		private:
 			std::string filepath;

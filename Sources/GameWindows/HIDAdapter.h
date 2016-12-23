@@ -26,8 +26,8 @@ namespace HID {
 			// Initalizer
 			void init(int);
 
-			// Connect to Window
-			void connect_window(std::shared_ptr<GameWindows::Window>);
+			// Connect a component
+			void connect_component(std::shared_ptr<ECS::Component_input>);
 
 			// Add events to catch
 			void add_events(std::vector<std::string>);

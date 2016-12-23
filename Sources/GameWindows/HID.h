@@ -12,6 +12,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <SDL2/SDL.h>
 
 #include "Ressources/Config.h"
 #include "GameWindows/HIDAdapter.h"
@@ -34,7 +35,7 @@ namespace HID {
 			void connect_adapter(std::shared_ptr<HID::HIDAdapter>);
 		private:
 			// Key binding
-			std::map<char, std::string> keymap;
+			std::map<SDL_Scancode, std::string> keymap;
 			// List of adapters
 			std::vector<std::shared_ptr<HID::HIDAdapter>> adapter_list;
 	};

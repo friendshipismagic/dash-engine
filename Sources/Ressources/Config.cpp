@@ -56,9 +56,9 @@ namespace Ressources {
 		out.close();
 	}
 
-	std::map<char, std::string> Config::get_keymap() {
-		std::map<char, std::string> keymap;
-		keymap['q'] = "exit";
+	std::map<SDL_Scancode, std::string> Config::get_keymap() {
+		std::map<SDL_Scancode, std::string> keymap;
+		keymap[SDL_SCANCODE_Q] = "exit";
 
 		return keymap;
 	}

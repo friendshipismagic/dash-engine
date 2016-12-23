@@ -113,8 +113,4 @@ namespace GameWindows {
 	void Window::swapBuffers() {
 		SDL_GL_SwapWindow(lWindow.get());
 	}
-
-	void Window::parse_event(std::string event) {
-		// TODO: Hum, what to do here?
-	}
 }

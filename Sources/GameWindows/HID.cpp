@@ -29,11 +29,17 @@ namespace HID {
 		// TODO: Treat the whole queue with corresponding keybinding
 		SDL_Event event;
 		while(SDL_PollEvent(&event)) {
+			// List of events can be found on:
+			// https://wiki.libsdl.org/SDL_EventType
 			switch(event.type) {
-				// List of events can be found on:
-				// https://wiki.libsdl.org/SDL_EventType
-			// Event to use is "HID::HIDAdapter::parse_event(std::string event)"
+				case SDL_KEYDOWN:
+					for(auto adapter: adapter_list)
+						adapter->parse_event(keymap[event.key.keysym.scancode]);
+					LOG(DEBUG) << "User pressed: "
+						<< SDL_GetScancodeName(event.key.keysym.scancode);
+					break;
 			}
+			// Event to use is "HID::HIDAdapter::parse_event(std::string event)"
 		}
 	}
 

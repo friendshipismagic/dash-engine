@@ -23,12 +23,12 @@ namespace HID {
 		this->ID = id;
 	}
 
-	void HIDAdapter::connect_window(
-			std::shared_ptr<GameWindows::Window> win) {
+	void HIDAdapter::connect_component(
+			std::shared_ptr<ECS::Component_input> comp) {
 		// Add only if it does not already exists
-		LOG(DEBUG) << "Connecting to window";
-		if(std::find(reg_wins.begin(), reg_wins.end(), win) == reg_wins.end())
-			reg_wins.push_back(win);
+		LOG(DEBUG) << "Connecting new input component";
+		if(std::find(reg_comp.begin(), reg_comp.end(), comp) == reg_comp.end())
+			reg_comp.push_back(comp);
 	}
 
 	void HIDAdapter::add_events(
