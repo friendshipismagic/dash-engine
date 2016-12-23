@@ -31,6 +31,8 @@ namespace Ressources {
 			void generate_default_config();
 
 			// Get keymap
+			// TODO: Add a context ID to get different keymaps based on current
+			// context
 			std::map<SDL_Scancode, std::string> get_keymap();
 
 		private:
