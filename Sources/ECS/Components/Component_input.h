@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "ECS/Component.h"
 
 namespace ECS {
@@ -19,9 +21,12 @@ namespace ECS {
 			Component_input();
 			// Default destructor, to use (external code). There will not be
 			// any stop method
-			~Component_input();
+			~Component_input() {};
 
 			// Update the values in the component
 			void update();
+		private:
+			// List of input events
+			std::vector<std::string> input_events;
 	};
 }
