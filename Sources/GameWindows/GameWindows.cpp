@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-#include "easylogging++.h"
+#include "ThirdParty/easylogging++.h"
 #include "GameWindows/Window.h"
 #include "GameWindows/HID.h"
 #include "GameWindows/HIDAdapter.h"
