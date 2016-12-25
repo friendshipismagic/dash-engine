@@ -12,7 +12,7 @@
 #include <memory>
 
 // Logging system
-#include "ThirdParty/easylogging++.h"
+#include "easylogging++.h"
 
 // GL Related includes
 #include <GL/glew.h>

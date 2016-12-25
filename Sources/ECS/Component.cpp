@@ -11,7 +11,7 @@
 #include <algorithm>
 
 #include "ECS/Entity.h"
-#include "ThirdParty/easylogging++.h"
+#include "easylogging++.h"
 
 #include "ECS/Component.h"
 

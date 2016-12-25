@@ -12,7 +12,7 @@
 #include <thread>
 
 #include "GameWindows/HID.h"
-#include "ThirdParty/easylogging++.h"
+#include "easylogging++.h"
 
 #include "GameLoop.h"
 

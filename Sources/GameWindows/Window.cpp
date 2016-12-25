@@ -13,7 +13,7 @@
 #include <SDL2/SDL.h>
 #include <memory>
 
-#include "ThirdParty/easylogging++.h"
+#include "easylogging++.h"
 #include "GameWindows/Window.h"
 
 namespace GameWindows {

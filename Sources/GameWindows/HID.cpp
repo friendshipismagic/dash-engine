@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <SDL2/SDL.h>
 
-#include "ThirdParty/easylogging++.h"
+#include "easylogging++.h"
 #include "Ressources/Config.h"
 #include "GameWindows/HIDAdapter.h"
 

@@ -15,9 +15,9 @@ LDLIBS = -lSDL2 -lGLU -lGL -lGLEW -lm -lpthread
 
 # Include directory
 INCDIR = -ISources \
-		 -Ithirdparty/rapidjson/include \
-		 -Ithirdparty/assimp/include \
-		 -Ithirdparty/easylogging
+		 -IThirdparty/rapidjson/include \
+		 -IThirdparty/assimp/include \
+		 -IThirdparty/easylogging
 
 # Auto-dependencies
 CPPFLAGS += -MMD -MP $(INCDIR)
