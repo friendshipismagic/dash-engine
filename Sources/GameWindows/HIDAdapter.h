@@ -13,6 +13,8 @@
 #include <memory>
 #include <vector>
 
+#include "ECS/Components/Component_input.h"
+
 #include "GameWindows/Window.h"
 
 namespace HID {
@@ -46,7 +48,7 @@ namespace HID {
 			int ID = 0;
 
 			// List of registered windows
-			std::vector<std::shared_ptr<GameWindows::Window>> reg_wins;
+			std::vector<std::shared_ptr<ECS::Component_input>> reg_comp;
 
 			// List of registered events to catch
 			std::vector<std::string> reg_events;
