@@ -1,3 +1,6 @@
 [submodule "Sources/ThirdParty/assimp"]
 	path = Sources/ThirdParty/assimp
 	url = https://github.com/assimp/assimp.git
+[submodule "Sources/ThirdParty/rapidjson"]
+	path = Sources/ThirdParty/rapidjson
+	url = https://github.com/miloyip/rapidjson.git
