@@ -14,10 +14,13 @@ CXX = clang++
 LDLIBS = -lSDL2 -lGLU -lGL -lGLEW -lm -lpthread
 
 # Include directory
-INCDIR = Sources/
+INCDIR = -ISources \
+		 -Ithirdparty/rapidjson/include \
+		 -Ithirdparty/assimp/include \
+		 -Ithirdparty/easylogging
 
 # Auto-dependencies
-CPPFLAGS += -MMD -MP -I$(INCDIR)
+CPPFLAGS += -MMD -MP $(INCDIR)
 
 # C++ Flags
 CXXFLAGS = -std=c++14 -Wall -O0 -g -pthread
