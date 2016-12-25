@@ -14,8 +14,7 @@
 #include "ECS/Components/Component_input.h"
 
 namespace ECS {
-	Component_input::Component_input(std::shared_ptr<HID::HIDAdapter> adapter) {
-		this->adapter = adapter;
+	Component_input::Component_input() {
 	}
 
 	void Component_input::parse_event(std::string event) {

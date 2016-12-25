@@ -12,8 +12,6 @@
 #include <vector>
 #include <memory>
 
-#include "GameWindows/HIDAdapter.h"
-
 #include "ECS/Component.h"
 
 namespace ECS {
@@ -21,7 +19,7 @@ namespace ECS {
 		public:
 			// Default construtor, to use (external code). There will not be
 			// any init method
-			Component_input(std::shared_ptr<HID::HIDAdapter>);
+			Component_input();
 			// Default destructor, to use (external code). There will not be
 			// any stop method
 			~Component_input() {};
@@ -30,8 +28,6 @@ namespace ECS {
 			// HID Adapters
 			void parse_event(std::string);
 		private:
-			// Main adapter from where to get keys status
-			std::shared_ptr<HID::HIDAdapter> adapter;
 			// List of input events
 			std::vector<std::string> input_events;
 	};
