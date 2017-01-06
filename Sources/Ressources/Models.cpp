@@ -9,12 +9,30 @@
 
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
+#include "easylogging++.h"
 
 #include "Ressources/Ressources.h"
 
 #include "Ressources/Models.h"
 
 namespace Ressources {
-	void Models::init(std::shared_ptr<Ressources::Manager>, std::string fn) {
+	void Models::init(std::shared_ptr<Ressources::Manager> fm, std::string fn) {
+		// As use ressource manager only once, we don't need to keep it
+		this->filepath = fm->getModelsFolderPath() + fn;
+
+		// Taken from the usage doc
+		Assimp::Importer importer;
+
+		// Read the file and do some postprocessing on it, the postprocessing
+		// should be configured in the config: TODO
+		scene = std::make_shared<const aiScene>(importer.readFile(filepath,
+					aiProcess_CalcTangentSpace      |
+					aiProcess_Triangulate           |
+					aiProcess_JoinIdenticalVertices |
+					aiProcess_SortByPType));
+
+		// If import failed, log it
+		if(!scene)
+			LOG(ERROR) << "Cannot load scene named " << fn;
 	}
 }

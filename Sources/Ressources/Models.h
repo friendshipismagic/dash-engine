@@ -24,9 +24,14 @@ namespace Ressources {
 
 			// Initializer, taking a model filename and ressource manager to get
 			// the Models folder
-			void init(std::shared_ptr<Ressources::Manager>, std::string fn);
+			void init(std::shared_ptr<Ressources::Manager> fm, std::string fn);
 
 			// Get the scene object (everything is seen as a scene)
-			std::shared_ptr<aiScene> getScene();
+			std::shared_ptr<const aiScene> getScene() { return scene; };
+
+		private:
+			std::string filepath;
+			std::shared_ptr<const aiScene> scene;
+
 	};
 }
