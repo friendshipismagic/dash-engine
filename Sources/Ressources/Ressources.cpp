@@ -23,4 +23,9 @@ namespace Ressources {
 		// TODO: give the right file path of the shaders folder
 		return "Shaders/";
 	}
+
+	std::string Manager::getModelsFolderPath() {
+		// TODO: give the right file path of the objects folder
+		return "Models/";
+	}
 }

@@ -30,5 +30,9 @@ namespace Ressources {
 			// Shaders file ressource, it should look for the right shader file
 			// path and return it
 			std::string getShadersFolderPath();
+
+			// Models file ressource, it should look for the right model file
+			// path and return it
+			std::string getModelsFolderPath();
 	};
 }
