@@ -9,6 +9,7 @@
 
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
+#include "assimp/postprocess.h"
 #include "easylogging++.h"
 
 #include "Ressources/Ressources.h"
@@ -21,15 +22,15 @@ namespace Ressources {
 		this->filepath = fm->getModelsFolderPath() + fn;
 
 		// Taken from the usage doc
-		Assimp::Importer importer;
+		importer = std::make_shared<Assimp::Importer>();
 
 		// Read the file and do some postprocessing on it, the postprocessing
 		// should be configured in the config: TODO
-		scene = std::make_shared<const aiScene>(importer.readFile(filepath,
-					aiProcess_CalcTangentSpace      |
-					aiProcess_Triangulate           |
-					aiProcess_JoinIdenticalVertices |
-					aiProcess_SortByPType));
+		scene = importer->ReadFile(filepath,
+				aiProcess_CalcTangentSpace      |
+				aiProcess_Triangulate           |
+				aiProcess_JoinIdenticalVertices |
+				aiProcess_SortByPType);
 
 		// If import failed, log it
 		if(!scene)

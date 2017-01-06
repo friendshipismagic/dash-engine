@@ -19,7 +19,7 @@ namespace ECS {
 	void Component::connect_entity(ECS::Entity entity) {
 		if(std::find(list_of_entities.begin(), list_of_entities.end(), entity)
 				== list_of_entities.end()) {
-			LOG(DEBUG) << "Registering new entity, ID: " << entity;
+			//LOG(DEBUG) << "Registering new entity, ID: " << entity;
 			list_of_entities.push_back(entity);
 		}
 	}

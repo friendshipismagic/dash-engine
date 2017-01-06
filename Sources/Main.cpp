@@ -24,9 +24,10 @@
 #include "GameWindows/GameWindows.h"
 #include "GameWindows/HID.h"
 
-// Config Manager lib
+// Ressources Manager lib
 #include "Ressources/Ressources.h"
 #include "Ressources/Config.h"
+#include "Ressources/Models.h"
 
 // Main Game Loop
 #include "GameLoop.h"
@@ -41,6 +42,7 @@ std::shared_ptr<GameLoop> gGameLoop;
 INITIALIZE_EASYLOGGINGPP
 
 // Setup the main game structure
+// This is the part where the game mecanics are setup
 void setupGame() {
 	int main_windows = gWindowManager->create_game_window("Dash Engine");
 
@@ -50,7 +52,14 @@ void setupGame() {
 
 	// Add them to adapter and connect it to main window
 	int exit_adapter = gWindowManager->create_adapter(events);
-	gWindowManager->connect_adapter(exit_adapter, main_windows);
+	gWindowManager->connect_adapter(exit_adapter);
+
+	//XXX
+	// Load an object to test the scene import
+	LOG(INFO) << "Loading model";
+	Ressources::Models test_model;
+	test_model.init(gRessourcesManager, "sphere.off");
+	
 }
 
 // Here we begin.

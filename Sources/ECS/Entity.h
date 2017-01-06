@@ -9,6 +9,18 @@
 
 #pragma once
 
+#include <sstream>
+
 namespace ECS {
-	using Entity = int;
+	class Entity {
+		public:
+			// Entity generator
+			static Entity generate();
+
+			// Just one need, test equality
+			bool operator==(Entity const& id) const;
+
+			// For logging purposes
+			//std::ostream& operator<<(std::ostream &out, const Entity &t);
+	};
 }

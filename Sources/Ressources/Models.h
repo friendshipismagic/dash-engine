@@ -12,6 +12,9 @@
 #include <memory>
 #include <string>
 
+#include "assimp/Importer.hpp"
+#include "assimp/scene.h"
+
 #include "Ressources/Ressources.h"
 
 namespace Ressources {
@@ -27,11 +30,13 @@ namespace Ressources {
 			void init(std::shared_ptr<Ressources::Manager> fm, std::string fn);
 
 			// Get the scene object (everything is seen as a scene)
-			std::shared_ptr<const aiScene> getScene() { return scene; };
+			const aiScene* getScene() const { return scene; };
 
 		private:
 			std::string filepath;
-			std::shared_ptr<const aiScene> scene;
-
+			// Importer is the importer class, that fully manages the scene
+			// pointer, making a smart pointer useless for scene object...
+			std::shared_ptr<Assimp::Importer> importer;
+			const aiScene* scene;
 	};
 }
