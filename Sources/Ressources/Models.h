@@ -14,6 +14,7 @@
 
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
+#include "Ressources/Mesh.h"
 
 #include "Ressources/Ressources.h"
 
@@ -38,5 +39,10 @@ namespace Ressources {
 			// pointer, making a smart pointer useless for scene object...
 			std::shared_ptr<Assimp::Importer> importer;
 			const aiScene* scene;
+
+			// Model Abstraction Layer
+			std::vector<Vertex> vertices;
+			std::vector<GLuint> indices;
+			std::vector<Texture> textures;
 	};
 }
