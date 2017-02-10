@@ -16,6 +16,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <GL/glew.h>
 
+#include "Ressources/Shaders.cpp"
+#include "assimp/scene.h"
+
 namespace Ressources {
 	struct Vertex {
 		// Position
@@ -44,13 +47,13 @@ namespace Ressources {
 					std::vector<GLuint>,
 					std::vector<Texture>);
 
-			// Render the mesh itself
-			void render();
+			// Render the mesh itself, using a shader
+			void render(Ressources::Shaders shader);
 		private:
 			// The mesh itself
 			std::vector<Vertex> vertices;
-			std::vector<GLuint>;
-			std::vector<Texture>;
+			std::vector<GLuint> indices;
+			std::vector<Texture> textures;
 			// OpenGL Objects
 			GLuint VAO, VBO, EBO;
 
