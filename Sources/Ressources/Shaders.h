@@ -13,6 +13,7 @@
 #include <string>
 
 #include "Ressources/Ressources.h"
+#include "Ressources/UShader.h"
 
 namespace Ressources {
 	class Shaders {
@@ -26,29 +27,22 @@ namespace Ressources {
 			void init(std::shared_ptr<Ressources::Manager>);
 
 			// List shaders
+			// TODO
 			void list_shaders();
 
-			//////////////////////////
-			// Per-shader functions //
-			//////////////////////////
-
-			// Shader loader
-			void shader_load();
-
-			// Shader unloader
-			void shader_unload();
-
-			// Shader status
-			int shader_status();
-
-			// Shader compile
-			void shader_compile();
-
-			// Shader link
-			void shader_link();
+			// Select shaders names to use in a vector
+			// Return the Shader Program ID
+			GLuint make_shader_program(std::vector<std::string>);
 
 		private:
+			// Add a shader
+			void add_shaders(std::vector<std::string>);
+
 			// Folder path of the shaders
 			std::string shaders_folder;
+			// Loaded shaders
+			std::vector<std::shared_ptr<Ressources::UShader>> shaders_list;
+			// Shader programs
+			std::vector<GLuint> program_shaders;
 	};
 }
