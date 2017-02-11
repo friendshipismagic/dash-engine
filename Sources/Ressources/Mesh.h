@@ -45,7 +45,8 @@ namespace Ressources {
 			// Initializer, taking vertices, indices and textures
 			void init(std::vector<Vertex>,
 					std::vector<GLuint>,
-					std::vector<Texture>);
+					std::vector<Texture>,
+					GLuint shaderProgram);
 
 			// Render the mesh itself, using a shader
 			void render(Ressources::Shaders shader);
@@ -54,6 +55,8 @@ namespace Ressources {
 			std::vector<Vertex> vertices;
 			std::vector<GLuint> indices;
 			std::vector<Texture> textures;
+			// The shader program associated to it
+			GLuint ShaderProgram;
 			// OpenGL Objects
 			GLuint VAO, VBO, EBO;
 
