@@ -13,13 +13,15 @@ CXX = clang++
 # Libs to load TODO: OPENGL_PATH?
 LDLIBS = -lSDL2 -lGLU -lGL -lGLEW -lm -lpthread \
 		 Thirdparty/assimp/lib/libassimp.a \
-		 Thirdparty/assimp/lib/libzlibstatic.a
+		 Thirdparty/assimp/lib/libzlibstatic.a \
+		 Thirdparty/SOIL/libSOIL.a
 
 # Include directory
 INCDIR = -ISources \
 		 -IThirdparty/rapidjson/include \
 		 -IThirdparty/assimp/include \
-		 -IThirdparty/easylogging
+		 -IThirdparty/easylogging \
+		 -IThirdparty/SOIL
 
 # Auto-dependencies
 CPPFLAGS += -MMD -MP $(INCDIR)
