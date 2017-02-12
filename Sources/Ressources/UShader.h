@@ -10,6 +10,7 @@
 #pragma once
 
 #include <string>
+#include <GL/glew.h>
 
 namespace Ressources {
 	class UShader {
@@ -18,7 +19,7 @@ namespace Ressources {
 			UShader(std::string name, GLenum shaderType, std::string filepath);
 
 			// Default Destructor
-			~UShader();
+			~UShader() {};
 
 			// Get the filepath of the shader
 			std::string get_name() { return filepath; };

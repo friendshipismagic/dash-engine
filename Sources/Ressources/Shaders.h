@@ -11,6 +11,8 @@
 
 #include <memory>
 #include <string>
+#include <vector>
+#include <GL/glew.h>
 
 #include "Ressources/Ressources.h"
 #include "Ressources/UShader.h"
@@ -34,9 +36,9 @@ namespace Ressources {
 			// Return the Shader Program ID
 			GLuint make_shader_program(std::vector<std::string>);
 
-		private:
 			// Add a shader
 			void add_shaders(std::vector<std::string>);
+		private:
 
 			// Folder path of the shaders
 			std::string shaders_folder;

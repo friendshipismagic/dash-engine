@@ -8,6 +8,7 @@
  */
 
 #include <memory>
+#include <string>
 
 #include "Ressources/Ressources.h"
 #include "Ressources/UShader.h"

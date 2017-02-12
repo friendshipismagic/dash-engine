@@ -76,7 +76,6 @@ namespace Ressources {
 		// Check it's ok
 		GLint compiled;
 		glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compiled);
-		glGetShaderInfoLog(shaderID, GL_COMPILE_STATUS, &compiled);
 		// TODO if compiled then it's ok, otherwize throw an exception !!
 		if(!compiled) {
 			GLint blen = 0;
@@ -86,7 +85,7 @@ namespace Ressources {
 
 			if(blen > 1) {
 				GLchar* compiler_log = (GLchar*)malloc(blen); // TODO ARGH
-				glGetInfoLog(shaderID, blen, &slen, compiler_log);
+				glGetShaderInfoLog(shaderID, blen, &slen, compiler_log);
 				// TODO error logs are in compiler_log
 				free(compiler_log);
 			}
