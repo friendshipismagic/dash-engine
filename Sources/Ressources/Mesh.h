@@ -16,7 +16,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <GL/glew.h>
 
-#include "Ressources/Shaders.cpp"
+#include "Ressources/Shaders.h"
 #include "assimp/scene.h"
 
 namespace Ressources {
