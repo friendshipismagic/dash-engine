@@ -32,10 +32,14 @@
 // Main Game Loop
 #include "GameLoop.h"
 
+// Graphical renderer
+#include "Renderer/BatchRenderer.h"
+
 // Managers
 std::shared_ptr<Ressources::Manager> gRessourcesManager;
 std::shared_ptr<Ressources::Config> gConfigManager;
 std::shared_ptr<GameWindows::Manager> gWindowManager;
+std::shared_ptr<Renderer::Batch> gBatchRenderer;
 std::shared_ptr<GameLoop> gGameLoop;
 
 // Macro used by easylogging for initializing the logging system
@@ -60,6 +64,10 @@ void setupGame() {
 	Ressources::Models test_model;
 	test_model.init(gRessourcesManager, "sphere.off");
 	
+	// Add the scene to the batch renderer for rendering :)
+	LOG(INFO) << "Importing model to renderer";
+	gBatchRenderer->set_scene(test_model.getScene());
+
 }
 
 // Here we begin.
@@ -86,6 +94,12 @@ int main(int argc, char **argv) {
 	gWindowManager = std::make_shared<GameWindows::Manager>();
 	gWindowManager->init(gConfigManager);
 	LOG(INFO) << "Windowing system online";
+
+	// Init Batch renderer
+	LOG(DEBUG) << "Initializing batch renderer";
+	gBatchRenderer = std::make_shared<Renderer::Batch>();
+	gBatchRenderer->init(gConfigManager);
+	LOG(INFO) << "Batch renderer online";
 
 	// Setup the game structure
 	LOG(DEBUG) << "Setting up game structure";
