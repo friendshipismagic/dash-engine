@@ -20,11 +20,6 @@
 namespace Ressources {
 	class Shaders {
 		public:
-			// Default constructor, should not do anything
-			Shaders() {};
-			// Default destructor, should not do anything
-			~Shaders() {};
-
 			// Initializer, taking a ressource manager to get the shader folder
 			void init(std::shared_ptr<Ressources::Manager>);
 
