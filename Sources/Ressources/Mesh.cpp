@@ -17,10 +17,12 @@ namespace Ressources {
 	// Parts of this code are based on learnopengl website (CC public domain)
 	void Mesh::init(std::vector<Vertex> vertices,
 			std::vector<GLuint> indices,
-			std::vector<Texture> textures) {
+			std::vector<Texture> textures,
+			GLuint shaderProgram) {
 		this->vertices = vertices;
 		this->indices = indices;
 		this->textures = textures;
+		this->shaderProgram = shaderProgram;
 
 		// Now set the VAO, VBO and EBO
 		// Create buffers/arrays
@@ -59,7 +61,7 @@ namespace Ressources {
 		glBindVertexArray(0);
 	}
 
-	void Mesh::render(GLuint shaderProgram) {
+	void Mesh::render() {
 		// Set Shader Program to use
 		glUseProgram(shaderProgram);
 
