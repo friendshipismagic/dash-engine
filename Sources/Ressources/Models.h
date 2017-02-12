@@ -26,17 +26,22 @@ namespace Ressources {
 			void init(std::shared_ptr<Ressources::Manager> fm, std::string fn);
 
 			// Get the scene object (everything is seen as a scene)
-			const aiScene* getScene() const { return scene; };
+			const aiScene* get_scene() const { return scene; };
+
+			// Render the whole scene
+			void render_scene();
 
 		private:
+			// Private import recursive calls
+			void processNode(aiNode* node, const aiScene* scene);
+			Ressources::Mesh processMesh(aiMesh* mesh, const aiScene* scene);
+
 			std::string filepath;
 			// Importer is the importer class, that fully manages the scene
 			// pointer, making a smart pointer useless for scene object...
 			std::shared_ptr<Assimp::Importer> importer;
 			const aiScene* scene;
-
-			// Model Abstraction Layer std::vector<Vertex> vertices;
-			std::vector<GLuint> indices;
-			std::vector<Texture> textures;
+			// List of meshes the scene contains
+			std::vector<Ressources::Mesh> meshes;
 	};
 }
