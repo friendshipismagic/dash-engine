@@ -40,8 +40,7 @@ namespace Ressources {
 			std::shared_ptr<Assimp::Importer> importer;
 			const aiScene* scene;
 
-			// Model Abstraction Layer
-			std::vector<Vertex> vertices;
+			// Model Abstraction Layer std::vector<Vertex> vertices;
 			std::vector<GLuint> indices;
 			std::vector<Texture> textures;
 	};

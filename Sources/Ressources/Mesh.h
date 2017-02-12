@@ -48,15 +48,15 @@ namespace Ressources {
 					std::vector<Texture>,
 					GLuint shaderProgram);
 
-			// Render the mesh itself, using a shader
-			void render(Ressources::Shaders shader);
+			// Render the mesh itself
+			void render();
 		private:
 			// The mesh itself
 			std::vector<Vertex> vertices;
 			std::vector<GLuint> indices;
 			std::vector<Texture> textures;
 			// The shader program associated to it
-			GLuint ShaderProgram;
+			GLuint shaderProgram;
 			// OpenGL Objects
 			GLuint VAO, VBO, EBO;
 
