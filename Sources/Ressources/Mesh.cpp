@@ -17,12 +17,10 @@ namespace Ressources {
 	// Parts of this code are based on learnopengl website (CC public domain)
 	void Mesh::init(std::vector<Vertex> vertices,
 			std::vector<GLuint> indices,
-			std::vector<Texture> textures,
-			GLuint shaderProgram) {
+			std::vector<Texture> textures) {
 		this->vertices = vertices;
 		this->indices = indices;
 		this->textures = textures;
-		this->shaderProgram = shaderProgram;
 
 		// Now set the VAO, VBO and EBO
 		// Create buffers/arrays
@@ -61,11 +59,10 @@ namespace Ressources {
 		glBindVertexArray(0);
 	}
 
-	void Mesh::render() {
+	void Mesh::render(GLuint shaderProgram) {
 		// Set Shader Program to use
 		glUseProgram(shaderProgram);
-/*
-		// XXX Don't know how it works here...
+
         // Bind appropriate textures
         GLuint diffuseNr = 1;
         GLuint specularNr = 1;
@@ -85,26 +82,26 @@ namespace Ressources {
                 ss << specularNr++; // Transfer GLuint to stream
             number = ss.str(); 
             // Now set the sampler to the correct texture unit
-            glUniform1i(glGetUniformLocation(shader.Program,
+            glUniform1i(glGetUniformLocation(shaderProgram,
 						(name + number).c_str()), i);
             // And finally bind the texture
             glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
         }
         
         // Also set each mesh's shininess property to a default value
-        glUniform1f(glGetUniformLocation(shader.Program, "material.shininess"),
+        glUniform1f(glGetUniformLocation(shaderProgram, "material.shininess"),
 				16.0f);
-*/
+
         // Draw mesh
         glBindVertexArray(this->VAO);
         glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
-/*
+
         // Always good practice to set everything back to defaults once configured.
         for (GLuint i = 0; i < this->textures.size(); i++)
         {
             glActiveTexture(GL_TEXTURE0 + i);
             glBindTexture(GL_TEXTURE_2D, 0);
-        }*/
+        }
 	}
 }

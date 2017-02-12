@@ -37,26 +37,18 @@ namespace Ressources {
 
 	class Mesh {
 		public:
-			// Default constructor, should not do anything
-			Mesh() {};
-			// Default destructor, should not do anything
-			~Mesh() {};
-			
 			// Initializer, taking vertices, indices and textures
 			void init(std::vector<Vertex>,
 					std::vector<GLuint>,
-					std::vector<Texture>,
-					GLuint shaderProgram);
+					std::vector<Texture>);
 
 			// Render the mesh itself
-			void render();
+			void render(GLuint ShaderProgram);
 		private:
 			// The mesh itself
 			std::vector<Vertex> vertices;
 			std::vector<GLuint> indices;
 			std::vector<Texture> textures;
-			// The shader program associated to it
-			GLuint shaderProgram;
 			// OpenGL Objects
 			GLuint VAO, VBO, EBO;
 

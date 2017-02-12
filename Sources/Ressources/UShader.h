@@ -18,9 +18,6 @@ namespace Ressources {
 			// Default constructor
 			UShader(std::string name, GLenum shaderType, std::string filepath);
 
-			// Default Destructor
-			~UShader() {};
-
 			// Get the filepath of the shader
 			std::string get_name() { return filepath; };
 
@@ -36,7 +33,7 @@ namespace Ressources {
 			// Shader compile
 			int compile();
 
-			// Shader link
+			// Shader link to Program
 			void link(GLuint);
 
 		private:

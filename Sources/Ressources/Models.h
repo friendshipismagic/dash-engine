@@ -21,11 +21,6 @@
 namespace Ressources {
 	class Models {
 		public:
-			// Default constructor, should not do anything
-			Models() {};
-			// Default destructor, should not do anything
-			~Models() {};
-
 			// Initializer, taking a model filename and ressource manager to get
 			// the Models folder
 			void init(std::shared_ptr<Ressources::Manager> fm, std::string fn);
