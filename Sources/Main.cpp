@@ -18,7 +18,7 @@
 #include <GL/glew.h>
 
 // GLSL-Like lib
-#include <glm/glm.hpp>
+#include "glm/glm.hpp"
 
 // Window Manager lib
 #include "GameWindows/GameWindows.h"
