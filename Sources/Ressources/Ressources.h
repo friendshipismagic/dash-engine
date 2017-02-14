@@ -11,6 +11,7 @@
 
 #include <memory>
 #include <string>
+#include <GL/glew.h>
 
 namespace Ressources {
 	class Manager {
@@ -34,5 +35,12 @@ namespace Ressources {
 			// Models file ressource, it should look for the right model file
 			// path and return it
 			std::string getModelsFolderPath();
+
+			// Default Shader Program to use when importing
+			GLuint getDefaultShaderProgram() { return defaultProgram; };
+			void setDefaultShaderProgram(GLuint p) { this->defaultProgram = p; };
+
+		private:
+			GLuint defaultProgram = 0;
 	};
 }

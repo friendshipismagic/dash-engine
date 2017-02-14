@@ -37,8 +37,12 @@ namespace Ressources {
 			Ressources::Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 			std::vector<Texture> loadMaterialTextures(aiMaterial*,
 					aiTextureType, std::string);
+			GLint TextureFromFile(const char*, std::string);
+			GLuint defaultShader;
+			
 
 			std::string filepath;
+			std::string directory;
 			// Importer is the importer class, that fully manages the scene
 			// pointer, making a smart pointer useless for scene object...
 			std::shared_ptr<Assimp::Importer> importer;

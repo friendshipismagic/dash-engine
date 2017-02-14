@@ -30,6 +30,7 @@ namespace Ressources {
 		// should be configured in the config: TODO
 		scene = importer->ReadFile(filepath,
 				aiProcess_CalcTangentSpace      |
+				aiProcess_GenNormals            |
 				aiProcess_Triangulate           |
 				aiProcess_JoinIdenticalVertices |
 				aiProcess_SortByPType);

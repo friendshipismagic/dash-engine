@@ -38,7 +38,7 @@ namespace Ressources {
 	class Mesh {
 		public:
 			// Initializer, taking vertices, indices and textures
-			void init(std::vector<Vertex>,
+			Mesh(std::vector<Vertex>,
 					std::vector<GLuint>,
 					std::vector<Texture>,
 					GLuint shaderProgram);

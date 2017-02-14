@@ -15,7 +15,7 @@
 
 namespace Ressources {
 	// Parts of this code are based on learnopengl website (CC public domain)
-	void Mesh::init(std::vector<Vertex> vertices,
+	Mesh::Mesh(std::vector<Vertex> vertices,
 			std::vector<GLuint> indices,
 			std::vector<Texture> textures,
 			GLuint shaderProgram) {
