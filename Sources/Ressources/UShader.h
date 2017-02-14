@@ -24,9 +24,6 @@ namespace Ressources {
 			// Shader loader
 			int load();
 
-			// Shader unloader
-			void unload();
-
 			// Shader status
 			int status();
 
@@ -43,9 +40,7 @@ namespace Ressources {
 			GLuint shaderID;
 			// File path of shader
 			std::string filepath;
-			// Source of shader (array)
-			GLchar** ss;
-			// Length of source array
-			int len;
+			// Source of shader
+			std::string shaderSource;
 	};
 }

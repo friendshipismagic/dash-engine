@@ -15,6 +15,8 @@
 #include <iostream>
 #include <GL/glew.h>
 
+#include "easylogging++.h"
+
 #include "Ressources/UShader.h"
 
 namespace Ressources {
@@ -25,43 +27,31 @@ namespace Ressources {
 	}
 
 	int UShader::load() {
-		// Open file
-		std::ifstream file(filepath.c_str(), std::ios::in);
-		if(!file) return -1;
-
-		// Get file length to store to array
-		file.seekg(0, std::ios::end);
-		len = file.tellg();
-		file.seekg(0, std::ios::beg);
-		if(len==0) return -2;
-
-		// Reserve memory to array
-		*ss = (GLchar*) new char[len+1];
-		if(*ss == 0) return -3;
-
-		// Get characters from file
-		*ss[len] = 0;
-		unsigned int i = 0;
-		while(file.good()) {
-			*ss[i] = file.get();
-			if(!file.eof()) i++;
+		std::ifstream shaderFile;
+		// ensures ifstream objects can throw exceptions:
+		shaderFile.exceptions(std::ifstream::badbit);
+		try 
+		{
+			// Open file
+			shaderFile.open(filepath);
+			std::stringstream shaderStream;
+			// Read file's buffer contents into stream
+			shaderStream << shaderFile.rdbuf();
+			// close file handlers
+			shaderFile.close();
+			// Convert stream into GLchar array
+			shaderSource = shaderStream.str();
 		}
-		*ss[i] = 0;
+		catch(std::ifstream::failure e)
+		{
+			LOG(ERROR) << "Shader file not succesfully read";
+		}
 
-		// Close file
-		file.close();
-
+		const GLchar* shaderCodeChar = shaderSource.c_str();
 		// Attach the sources to the shader object
-		glShaderSource(shaderID, 1, ss, &len);
+		glShaderSource(shaderID, 1, &shaderCodeChar, NULL);
 
 		return 0;
-	}
-
-	void UShader::unload() {
-		if(*ss !=0)
-			delete[] *ss;
-
-		*ss = 0;
 	}
 
 	int UShader::status() {
