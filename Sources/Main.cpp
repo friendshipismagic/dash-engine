@@ -61,12 +61,13 @@ void setupGame() {
 	//XXX
 	// Load an object to test the scene import
 	LOG(INFO) << "Loading model";
-	Ressources::Models test_model;
-	test_model.init(gRessourcesManager, "sphere.off");
+	std::shared_ptr<Ressources::Models> test_model;
+	test_model = std::make_shared<Ressources::Models>();
+	test_model->init(gRessourcesManager, "sphere.off");
 
 	// Add the scene to the batch renderer for rendering :)
 	LOG(INFO) << "Importing model to renderer";
-	gBatchRenderer->set_scene(test_model.get_scene());
+	gBatchRenderer->set_scene(test_model);
 
 }
 
@@ -98,7 +99,7 @@ int main(int argc, char **argv) {
 	// Init Batch renderer
 	LOG(DEBUG) << "Initializing batch renderer";
 	gBatchRenderer = std::make_shared<Renderer::Batch>();
-	gBatchRenderer->init(gConfigManager);
+	gBatchRenderer->init(gConfigManager, gWindowManager);
 	LOG(INFO) << "Batch renderer online";
 
 	// Setup the game structure

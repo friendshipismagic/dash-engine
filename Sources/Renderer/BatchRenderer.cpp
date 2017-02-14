@@ -15,24 +15,23 @@
 #include "Renderer/BatchRenderer.h"
 
 namespace Renderer {
-	void Batch::init(std::shared_ptr<Ressources::Config> lConfigManager) {
+	void Batch::init(std::shared_ptr<Ressources::Config> lConfigManager,
+			std::shared_ptr<GameWindows::Manager> lWindowManager) {
 		// Set config manager
 		this->lConfigManager = lConfigManager;
+		// Set window manager
+		this->lWindowManager = lWindowManager;
 	}
 
-	void Batch::set_scene(const aiScene* scene) {
-		this->scene = scene;
+	void Batch::set_scene(std::shared_ptr<Ressources::Models> model) {
+		this->model = model;
 	}
 
 	void Batch::render() {
-		if(!scene->HasCameras()) {
-			LOG(ERROR) << "Fatal error: scene has not any camera to render!";
-			return;
-		}
+		// Just render the raw model for now
+		model->render_scene();
 
-		// Start rendering each camera
-		for(int i=0; i< scene->mNumCameras; i++) {
-			
-		}
+		// Swap buffers
+		lWindowManager->swap_buffers();
 	}
 }

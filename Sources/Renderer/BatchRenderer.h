@@ -11,6 +11,7 @@
 
 #include <memory>
 
+#include "GameWindows/GameWindows.h"
 #include "Ressources/Models.h"
 #include "Ressources/Config.h"
 
@@ -24,19 +25,21 @@ namespace Renderer {
 
 			// Initalizer, retrieves the rendering configuration from config
 			// manager
-			void init(std::shared_ptr<Ressources::Config>);
+			void init(std::shared_ptr<Ressources::Config>,
+					std::shared_ptr<GameWindows::Manager>);
 
 			// Add a scene to render
-			// XXX: Why do I need these awful raw pointers...
-			void set_scene(const aiScene*);
+			void set_scene(std::shared_ptr<Ressources::Models>);
 
 			// Start a rendering process now, using current opengl context
 			void render();
 		private:
 			// Config manager
 			std::shared_ptr<Ressources::Config> lConfigManager;
+			// Window manager
+			std::shared_ptr<GameWindows::Manager> lWindowManager;
 
 			// List of scenes to render
-			const aiScene* scene;
+			std::shared_ptr<Ressources::Models> model;
 	};
 }

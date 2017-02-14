@@ -72,4 +72,9 @@ namespace GameWindows {
 				return adapt;
 		return nullptr;
 	}
+
+	void Manager::swap_buffers() const {
+		for(std::shared_ptr<GameWindows::Window> window: windowslist)
+			window->swapBuffers();
+	}
 }

@@ -45,6 +45,9 @@ namespace GameWindows {
 			// Get the HID Manager for the Game loop
 			std::shared_ptr<HID::Manager> getHID() const { return gHIDManager; };
 
+			// Swap all buffers
+			void swap_buffers() const;
+
 		private:
 			// List of currently in-use windows
 			std::vector<std::shared_ptr<GameWindows::Window>> windowslist;
