@@ -19,7 +19,9 @@
 namespace Ressources {
 	void Models::init(std::shared_ptr<Ressources::Manager> fm, std::string fn) {
 		// As use ressource manager only once, we don't need to keep it
-		this->filepath = fm->getModelsFolderPath() + fn;
+		this->directory = fm->getModelsFolderPath();
+		this->filepath = directory + fn;
+		defaultShader = fm->getDefaultShaderProgram();
 
 		// Taken from the usage doc
 		importer = std::make_shared<Assimp::Importer>();
@@ -115,53 +117,7 @@ namespace Ressources {
 				indices.push_back(face.mIndices[j]);
 		}
 
-		// Process materials
-		if(mesh->mMaterialIndex >= 0)
-		{
-			aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-			// We assume a convention for sampler names in the shaders.
-			// Each diffuse texture should be named as 'texture_diffuseN'
-			// where N is a sequential number ranging
-			// from 1 to MAX_SAMPLER_NUMBER. 
-			// Same applies to other texture as the following list summarizes:
-			// Diffuse: texture_diffuseN
-			// Specular: texture_specularN
-			// Normal: texture_normalN
-
-			// 1. Diffuse maps
-			std::vector<Texture> diffuseMaps =
-				this->loadMaterialTextures(material, aiTextureType_DIFFUSE,
-						"texture_diffuse");
-			textures.insert(textures.end(),
-					diffuseMaps.begin(), diffuseMaps.end());
-
-			// 2. Specular maps
-			std::vector<Texture> specularMaps =
-				this->loadMaterialTextures(material, aiTextureType_SPECULAR,
-						"texture_specular");
-			textures.insert(textures.end(),
-					specularMaps.begin(), specularMaps.end());
-		}
-
 		// Return a mesh object created from the extracted mesh data
-		// TODO Add default Shader
-		return Ressources::Mesh(vertices, indices, textures);
+		return Ressources::Mesh(vertices, indices, textures, defaultShader);
 	}
-
-	std::vector<Texture> loadMaterialTextures(aiMaterial* mat,
-			aiTextureType type, std::string typeName) {
-		std::vector<Texture> textures;
-		for(GLuint i = 0; i < mat->GetTextureCount(type); i++)
-		{
-			aiString str;
-			mat->GetTexture(type, i, &str);
-			Texture texture;
-			texture.id = TextureFromFile(str.C_Str(), this->directory);
-			texture.type = typeName;
-			texture.path = str;
-			textures.push_back(texture);
-		}
-		return textures;
-	}  
-
 }
