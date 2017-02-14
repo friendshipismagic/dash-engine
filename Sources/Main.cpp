@@ -63,10 +63,10 @@ void setupGame() {
 	LOG(INFO) << "Loading model";
 	Ressources::Models test_model;
 	test_model.init(gRessourcesManager, "sphere.off");
-	
+
 	// Add the scene to the batch renderer for rendering :)
 	LOG(INFO) << "Importing model to renderer";
-	gBatchRenderer->set_scene(test_model.getScene());
+	gBatchRenderer->set_scene(test_model.get_scene());
 
 }
 
@@ -110,6 +110,7 @@ int main(int argc, char **argv) {
 	gGameLoop = std::make_shared<GameLoop>();
 	gGameLoop->init(1000000); // 1s fixed time update
 	gGameLoop->connect_HID(gWindowManager->getHID());
+	gGameLoop->connect_renderer(gBatchRenderer);
 
 	// enter event processing cycle
 	LOG(DEBUG) << "Entering game loop, goodbye!";

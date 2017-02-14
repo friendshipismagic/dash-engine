@@ -13,6 +13,7 @@
 #include <chrono>
 
 #include "GameWindows/HID.h"
+#include "Renderer/BatchRenderer.h"
 
 // TODO: Should I put it in a namespace?
 
@@ -29,11 +30,16 @@ class GameLoop {
 		// Connect the HID Manager
 		void connect_HID(std::shared_ptr<HID::Manager>);
 
+		// Connect renderer engine
+		void connect_renderer(std::shared_ptr<Renderer::Batch>);
+
 		// Enter the loop :)
 		void loop();
 	private:
 		// Main HID Manager
 		std::shared_ptr<HID::Manager> lHIDManager;
+		// Main Batch Renderer
+		std::shared_ptr<Renderer::Batch> lBatchRenderer;
 		// Temp variable used for storing the last update time clock
 		std::chrono::high_resolution_clock::time_point last_update;
 		std::chrono::high_resolution_clock::time_point input_time;

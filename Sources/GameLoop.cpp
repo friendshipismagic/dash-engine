@@ -12,6 +12,7 @@
 #include <thread>
 
 #include "GameWindows/HID.h"
+#include "Renderer/BatchRenderer.h"
 #include "easylogging++.h"
 
 #include "GameLoop.h"
@@ -28,6 +29,11 @@ void GameLoop::connect_HID(std::shared_ptr<HID::Manager> gHIDManager) {
 	lHIDManager = gHIDManager;
 }
 
+void GameLoop::connect_renderer(std::shared_ptr<Renderer::Batch> gBR) {
+	// Connect the Batch Renderer
+	lBatchRenderer = gBR;
+}
+
 void GameLoop::loop() {
 	while(1) {
 		// Process the inputs
@@ -39,7 +45,7 @@ void GameLoop::loop() {
 		elapsed_input_time = std::chrono::duration_cast<std::chrono::microseconds>
 			(input_time - last_update).count();
 
-		// Update the game, ad we know how many time is left before the displaying
+		// Update the game, as we know how many time is left before the displaying
 		// to the user, we can update the game to now + time to render
 		// TODO: Implement game update - (Physics + Animation)
 		LOG(DEBUG) << "Updating the game";
@@ -52,6 +58,7 @@ void GameLoop::loop() {
 		// Render (variable rendering)
 		// TODO: Implement the render engine
 		LOG(DEBUG) << "Rendering image";
+		lBatchRenderer->render();
 
 		// Time to render
 		render_time = std::chrono::high_resolution_clock::now();
