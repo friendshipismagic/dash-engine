@@ -28,6 +28,7 @@
 #include "Ressources/Ressources.h"
 #include "Ressources/Config.h"
 #include "Ressources/Models.h"
+#include "Ressources/Shaders.h"
 
 // Main Game Loop
 #include "GameLoop.h"
@@ -38,6 +39,7 @@
 // Managers
 std::shared_ptr<Ressources::Manager> gRessourcesManager;
 std::shared_ptr<Ressources::Config> gConfigManager;
+std::shared_ptr<Ressources::Shaders> gShadersManager;
 std::shared_ptr<GameWindows::Manager> gWindowManager;
 std::shared_ptr<Renderer::Batch> gBatchRenderer;
 std::shared_ptr<GameLoop> gGameLoop;
@@ -57,6 +59,12 @@ void setupGame() {
 	// Add them to adapter and connect it to main window
 	int exit_adapter = gWindowManager->create_adapter(events);
 	gWindowManager->connect_adapter(exit_adapter);
+
+	LOG(DEBUG) << "Adding default shader";
+	std::vector<std::string> default_shaders = {"default.frag", "default.vert"};
+	GLuint default_prog = gShadersManager->make_shader_program(default_shaders);
+	gRessourcesManager->setDefaultShaderProgram(default_prog);
+	LOG(DEBUG) << "Shaders online";
 
 	//XXX
 	// Load an object to test the scene import
@@ -90,6 +98,10 @@ int main(int argc, char **argv) {
 	gConfigManager = std::make_shared<Ressources::Config>();
 	gConfigManager->init(gRessourcesManager);
 	LOG(INFO) << "Ressources online";
+	// Init Shaders manager
+	LOG(DEBUG) << "Initializing shaders manager";
+	gShadersManager = std::make_shared<Ressources::Shaders>();
+	gShadersManager->init(gRessourcesManager);
 
 	// Init Window manager
 	LOG(DEBUG) << "Initializing Window manager";
