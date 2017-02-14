@@ -79,6 +79,7 @@ int main(int argc, char **argv) {
 	START_EASYLOGGINGPP(argc, argv);
 	// Load logger conf
 	el::Configurations easylogConf("log.conf");
+	el::Loggers::reconfigureAllLoggers(easylogConf);
 	LOG(INFO) << "Logging system online";
 
 	// Init ressource manager
