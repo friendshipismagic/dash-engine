@@ -12,6 +12,7 @@
 
 #include "Ressources/Ressources.h"
 #include "Ressources/UShader.h"
+#include "easylogging++.h"
 
 #include "Ressources/Shaders.h"
 
@@ -86,7 +87,7 @@ namespace Ressources {
 				else if(extension == "vert")
 					shaderType = GL_VERTEX_SHADER;
 				else {
-					// TODO Log the error
+					LOG(ERROR) << "Shader is of wrong extension";
 					return;
 				}
 				// Make the shader itself
