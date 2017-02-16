@@ -66,7 +66,6 @@ namespace Ressources {
 		// Check it's ok
 		GLint compiled;
 		glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compiled);
-		// TODO if compiled then it's ok, otherwize throw an exception !!
 		if(!compiled) {
 			GLint blen = 0;
 			GLsizei slen = 0;
@@ -74,9 +73,10 @@ namespace Ressources {
 			glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &blen);
 
 			if(blen > 1) {
-				GLchar* compiler_log = (GLchar*)malloc(blen); // TODO ARGH
+				GLchar* compiler_log = (GLchar*)malloc(blen);
 				glGetShaderInfoLog(shaderID, blen, &slen, compiler_log);
-				// TODO error logs are in compiler_log
+				LOG(ERROR) << "Shader could not compile successfully";
+				LOG(ERROR) << compiler_log;
 				free(compiler_log);
 			}
 			return -1;
@@ -86,7 +86,6 @@ namespace Ressources {
 
 	void UShader::link(GLuint shaderProgram) {
 		glAttachShader(shaderProgram, shaderID);
-		// TODO Check for linking issue as for compilation
 	}
 
 }

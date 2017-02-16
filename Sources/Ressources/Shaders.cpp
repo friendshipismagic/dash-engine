@@ -43,7 +43,6 @@ namespace Ressources {
 		// Check if link is ok
 		GLint linked;
 		glGetProgramiv(shaderProgram, GL_LINK_STATUS, &linked);
-		// TODO if compiled then it's ok, otherwize throw an exception !!
 		if(!linked) {
 			GLint blen = 0;
 			GLsizei slen = 0;
@@ -51,9 +50,10 @@ namespace Ressources {
 			glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &blen);
 
 			if(blen > 1) {
-				GLchar* compiler_log = (GLchar*)malloc(blen); // TODO ARGH
+				GLchar* compiler_log = (GLchar*)malloc(blen);
 				glGetProgramInfoLog(shaderProgram, blen, &slen, compiler_log);
-				// TODO error logs are in compiler_log
+				LOG(ERROR) << "Shader could not link successfully";
+				LOG(ERROR) << compiler_log;
 				free(compiler_log);
 			}
 		}
