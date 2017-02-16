@@ -18,9 +18,9 @@
 
 namespace GameWindows {
 	void Window::init(int ID, std::string title, int width, int height) {
-		// Set the opengl context version to GL 3.2
+		// Set the opengl context version to GL 3.0
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 
 		// Turn on double buffering
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -94,6 +94,8 @@ namespace GameWindows {
 
 		// Set the basic line width to be 2px
 		glLineWidth(2.0f);
+
+		glViewport( 0, 0, 800, 600);
 
 		// Black background
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
