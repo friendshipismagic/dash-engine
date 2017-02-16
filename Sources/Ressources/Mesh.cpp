@@ -65,6 +65,8 @@ namespace Ressources {
 		// Set Shader Program to use
 		glUseProgram(shaderProgram);
 
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         // Set each mesh's shininess property to a default value
         glUniform1f(glGetUniformLocation(shaderProgram, "material.shininess"),
 				16.0f);
