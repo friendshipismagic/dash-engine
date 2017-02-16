@@ -87,24 +87,6 @@ namespace Ressources {
 	void UShader::link(GLuint shaderProgram) {
 		glAttachShader(shaderProgram, shaderID);
 		// TODO Check for linking issue as for compilation
-		GLint linked;
-		glGetProgramiv(shaderProgram, GL_LINK_STATUS, &linked);
-		// TODO if compiled then it's ok, otherwize throw an exception !!
-		if(!linked) {
-			GLint blen = 0;
-			GLsizei slen = 0;
-
-			glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &blen);
-
-			if(blen > 1) {
-				GLchar* compiler_log = (GLchar*)malloc(blen); // TODO ARGH
-				glGetProgramInfoLog(shaderProgram, blen, &slen, compiler_log);
-				// TODO error logs are in compiler_log
-				free(compiler_log);
-			}
-			return ;
-		}
-		return ;
 	}
 
 }
