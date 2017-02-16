@@ -1,7 +1,11 @@
-#version 330 core
+#version 130
 
-out vec4 color;
+precision highp float; // needed only for version 1.30
 
-void main() {
-	color = vec4(0.0, 1.0, 0.0, 1.0);
+in  vec3 ex_Color;
+out vec4 out_Color;
+
+void main(void)
+{
+	out_Color = vec4(ex_Color, 1.0);
 }
