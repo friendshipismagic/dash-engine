@@ -35,6 +35,7 @@
 
 // Graphical renderer
 #include "Renderer/BatchRenderer.h"
+#include "Renderer/Lights.h"
 
 // Managers
 std::shared_ptr<Ressources::Manager> gRessourcesManager;
@@ -42,6 +43,7 @@ std::shared_ptr<Ressources::Config> gConfigManager;
 std::shared_ptr<Ressources::Shaders> gShadersManager;
 std::shared_ptr<GameWindows::Manager> gWindowManager;
 std::shared_ptr<Renderer::Batch> gBatchRenderer;
+std::shared_ptr<Renderer::Lights> gLights;
 std::shared_ptr<GameLoop> gGameLoop;
 
 // Macro used by easylogging for initializing the logging system
@@ -71,11 +73,17 @@ void setupGame() {
 	LOG(INFO) << "Loading model";
 	std::shared_ptr<Ressources::Models> test_model;
 	test_model = std::make_shared<Ressources::Models>();
-	test_model->init(gRessourcesManager, "sphere.off");
+	test_model->init(gRessourcesManager, "monkey.off");
 
 	// Add the scene to the batch renderer for rendering :)
 	LOG(INFO) << "Importing model to renderer";
 	gBatchRenderer->set_scene(test_model);
+
+	// Turn on some lights
+	LOG(INFO) << "Turning lights 0, 1, 2 on";
+	gLights->toggleLight(0);
+	gLights->toggleLight(1);
+	gLights->toggleLight(2);
 
 }
 
@@ -114,6 +122,11 @@ int main(int argc, char **argv) {
 	gBatchRenderer = std::make_shared<Renderer::Batch>();
 	gBatchRenderer->init(gConfigManager, gWindowManager);
 	LOG(INFO) << "Batch renderer online";
+
+	// Init Lighting system
+	LOG(DEBUG) << "Initializing lighting system";
+	gLights = std::make_shared<Renderer::Lights>();
+	LOG(INFO) << "Lighting system online";
 
 	// Setup the game structure
 	LOG(DEBUG) << "Setting up game structure";

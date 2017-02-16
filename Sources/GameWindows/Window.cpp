@@ -92,6 +92,9 @@ namespace GameWindows {
 		// Force normalization
 		glEnable(GL_NORMALIZE);
 
+		// Enable lights
+		glEnable(GL_LIGHTING);
+
 		// Set the basic line width to be 2px
 		glLineWidth(2.0f);
 
