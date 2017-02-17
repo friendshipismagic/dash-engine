@@ -73,7 +73,7 @@ void setupGame() {
 	LOG(INFO) << "Loading model";
 	std::shared_ptr<Ressources::Models> test_model;
 	test_model = std::make_shared<Ressources::Models>();
-	test_model->init(gRessourcesManager, "monkey.off");
+	test_model->init(gRessourcesManager, "teapot.obj");
 
 	// Add the scene to the batch renderer for rendering :)
 	LOG(INFO) << "Importing model to renderer";
@@ -135,7 +135,7 @@ int main(int argc, char **argv) {
 
 	// Instanciate the game loop
 	gGameLoop = std::make_shared<GameLoop>();
-	gGameLoop->init(1000000); // 1s fixed time update
+	gGameLoop->init(100000/6); // 60 Hz fixed time update
 	gGameLoop->connect_HID(gWindowManager->getHID());
 	gGameLoop->connect_renderer(gBatchRenderer);
 
