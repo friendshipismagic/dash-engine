@@ -80,10 +80,10 @@ void setupGame() {
 	gBatchRenderer->set_scene(test_model);
 
 	// Turn on some lights
-	LOG(INFO) << "Turning lights 0, 1, 2 on";
-	gLights->toggleLight(0);
-	gLights->toggleLight(1);
-	gLights->toggleLight(2);
+	LOG(INFO) << "Making lights";
+	int light0 = gLights->add_light();
+	// Turn on the light
+	gLights->set_light_state(light0, true);
 
 }
 

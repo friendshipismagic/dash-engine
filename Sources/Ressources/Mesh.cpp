@@ -59,6 +59,14 @@ namespace Ressources {
 		// Set Shader Program to use
 		glUseProgram(shaderProgram);
 
+		// Bind Lights UBO to shader
+		unsigned int lights_block_index =
+			glGetUniformBlockIndex(shaderProgram, "gl_LightSources");
+		GLuint lights_binding_point_index = 1;
+		glUniformBlockBinding(shaderProgram,
+				lights_block_index,
+				lights_binding_point_index);
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Draw mesh

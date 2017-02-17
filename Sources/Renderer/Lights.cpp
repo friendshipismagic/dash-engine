@@ -7,11 +7,12 @@
  * ----------------------------------------------------------------------------
  */
 
-#include "Lights.h"
-
+#include <GL/glew.h>
 #include <cmath>
 #include <cstring>
 #include "easylogging++.h"
+
+#include "Lights.h"
 
 namespace Renderer {
 	Lights::Lights() {
@@ -37,49 +38,49 @@ namespace Renderer {
 		LOG(DEBUG) << "Updated Light parameters";
 	}
 
-	void Lights::add_light() {
+	int Lights::add_light() {
 		gl_LightSourceParameters light_params;
 		lights.push_back(light_params);
 		// Return lastID and increment it after
 		return lastID++;
 	}
 
-	void Light::set_light_state(int ID, bool state) {
+	void Lights::set_light_state(int ID, bool state) {
 		lights[ID].enabled = state;
 	}
 
-	void Light::set_ambient(int ID, glm::vec4 ambient) {
+	void Lights::set_ambient(int ID, glm::vec4 ambient) {
 		lights[ID].ambient = ambient;
 	}
 
-	void Light::set_diffuse(int ID, glm::vec4 diffuse) {
+	void Lights::set_diffuse(int ID, glm::vec4 diffuse) {
 		lights[ID].diffuse = diffuse;
 	}
 
-	void Light::set_specular(int ID, glm::vec4 spec) {
+	void Lights::set_specular(int ID, glm::vec4 spec) {
 		lights[ID].specular = spec;
 	}
 
-	void Light::set_position(int ID, glm::vec4 pos) {
+	void Lights::set_position(int ID, glm::vec4 pos) {
 		lights[ID].position = pos;
 	}
 
-	void Light::set_direction(int ID, glm::vec3 dir) {
+	void Lights::set_direction(int ID, glm::vec3 dir) {
 		lights[ID].spotDirection = dir;
 	}
 
-	void Light::set_exponent(int ID, float exp) {
+	void Lights::set_exponent(int ID, float exp) {
 		lights[ID].spotExponent = exp;
 	}
 
-	void Light::set_cutoff(int ID, float cutoff) {
+	void Lights::set_cutoff(int ID, float cutoff) {
 		// Clamp value if under 0 or above 90
-		cutoff = std::max(0.0f, std::min(cutoff, 90.0f);
+		cutoff = std::max(0.0f, std::min(cutoff, 90.0f));
 		lights[ID].spotCutoff = cutoff;
-		lights[ID].spotCosCutoff = std::cos(cutoff * std::PI/180);
+		lights[ID].spotCosCutoff = std::cos(cutoff * M_PI/180);
 	}
 
-	void Light::set_attenuation(int ID, float K0, float K1, float K2) {
+	void Lights::set_attenuation(int ID, float K0, float K1, float K2) {
 		lights[ID].constantAttenuation = K0;
 		lights[ID].linearAttenuation = K1;
 		lights[ID].quadraticAttenuation = K2;
