@@ -19,7 +19,9 @@ namespace Renderer {
 	class Lights {
 		public:
 			Lights();
-			void toggleLight(int id);
+
+			// Add a light
+			int add_light();
 
 		private:
 			void update_UBO();
@@ -28,6 +30,8 @@ namespace Renderer {
 			// This structure is the same as defined in OpenGL Shader
 			// Language Specifications in V 1.30 and newer
 			struct gl_LightSourceParameters {
+				gl_LightSourceParameters(): enabled(false) {}
+				bool enabled;
 				glm::vec4 ambient; // Acli
 				glm::vec4 diffuse; // Dcli
 				glm::vec4 specular; // Scli
@@ -48,5 +52,8 @@ namespace Renderer {
 
 			// UBO Id
 			GLuint UBO;
+
+			// Last ID of light (lastID is not in use, use it directly)
+			int lastID;
 	};
 }

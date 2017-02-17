@@ -26,4 +26,11 @@ namespace Renderer {
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 		LOG(DEBUG) << "Updated Light parameters";
 	}
+
+	void Lights::add_light() {
+		gl_LightSourceParameters light_params;
+		lights.push_back(light_params);
+		// Return lastID and increment it after
+		return lastID++;
+	}
 }
