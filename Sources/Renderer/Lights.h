@@ -23,6 +23,26 @@ namespace Renderer {
 			// Add a light
 			int add_light();
 
+			/// Change light parameters
+			// Enable or disable light
+			void set_light_state(bool);
+			// Change ambient value
+			void set_ambient(glm::vec4);
+			// Change diffuse value
+			void set_diffuse(glm::vec4);
+			// Change specular value
+			void set_specular(glm::vec4);
+			// Change position
+			void set_position(glm::vec4);
+			// Change direction (only if directive spot)
+			void set_direction(glm::vec3);
+			// Change exponent
+			void set_exponent(float);
+			// Change cut-off value
+			void set_cutoff(float);
+			// Change Attenuation values, constant, linear then quadratic
+			void set_attenuation(float K0, float K1, float K2);
+
 		private:
 			void update_UBO();
 
@@ -36,7 +56,6 @@ namespace Renderer {
 				glm::vec4 diffuse; // Dcli
 				glm::vec4 specular; // Scli
 				glm::vec4 position; // Ppli
-				glm::vec4 halfVector; // Derived: Hi
 				glm::vec3 spotDirection; // Sdli
 				float spotExponent; // Srli
 				float spotCutoff; // Crli
