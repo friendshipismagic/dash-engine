@@ -17,4 +17,13 @@ namespace Renderer {
 		glGenBuffers(1, &UBO);
 		glBindBuffer(GL_UNIFORM_BUFFER, UBO);
 	}
+
+	void Lights::update_UBO() {
+		glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+		glBufferData(GL_UNIFORM_BUFFER,
+				lights.size() * sizeof(gl_LightSourceParameters),
+				&lights[0], GL_DYNAMIC_COPY);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+		LOG(DEBUG) << "Updated Light parameters";
+	}
 }

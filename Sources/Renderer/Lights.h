@@ -13,6 +13,7 @@
 
 #include <glm/glm.hpp>
 #include <GL/glut.h>
+#include <vector>
 
 namespace Renderer {
 	class Lights {
@@ -42,6 +43,8 @@ namespace Renderer {
 				float linearAttenuation; // K1
 				float quadraticAttenuation;// K2
 			};
+
+			std::vector<gl_LightSourceParameters> lights;
 
 			// UBO Id
 			GLuint UBO;
