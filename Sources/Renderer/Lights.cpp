@@ -22,6 +22,10 @@ namespace Renderer {
 				lights.size() * sizeof(gl_LightSourceParameters),
 				&lights[0], GL_DYNAMIC_COPY);
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+		// Light is on Binding Index 1
+		GLuint binding_point_index = 1;
+		glBindBufferBase(GL_UNIFORM_BUFFER, binding_point_index, UBO);
+
 	}
 
 	void Lights::update_UBO() {
