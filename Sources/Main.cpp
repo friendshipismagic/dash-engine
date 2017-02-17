@@ -62,6 +62,11 @@ void setupGame() {
 	int exit_adapter = gWindowManager->create_adapter(events);
 	gWindowManager->connect_adapter(exit_adapter);
 
+	// Init Lighting system
+	LOG(DEBUG) << "Initializing lighting system";
+	gLights = std::make_shared<Renderer::Lights>();
+	LOG(INFO) << "Lighting system online";
+
 	LOG(DEBUG) << "Adding default shader";
 	std::vector<std::string> default_shaders = {"default.frag", "default.vert"};
 	GLuint default_prog = gShadersManager->make_shader_program(default_shaders);
@@ -81,10 +86,24 @@ void setupGame() {
 
 	// Turn on some lights
 	LOG(INFO) << "Making lights";
-	int light0 = gLights->add_light();
-	// Turn on the light
-	gLights->set_light_state(light0, true);
+	// Set light 0
+	gLights->set_light_state(0, true);
+	gLights->set_diffuse(0, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	gLights->set_specular(0, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	gLights->set_position(0, glm::vec4(10.0f, 0.0f, 0.0f, 1.0f));
+	// Set light 1
+	gLights->set_light_state(1, true);
+	gLights->set_diffuse(1, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+	gLights->set_specular(1, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+	gLights->set_position(1, glm::vec4( 0.0f,10.0f, 0.0f, 1.0f));
+	// Set light 2
+	gLights->set_light_state(2, true);
+	gLights->set_diffuse(2, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+	gLights->set_specular(2, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+	gLights->set_position(2, glm::vec4( 0.0f, 0.0f,10.0f, 1.0f));
 
+	// Update all now
+	gLights->update_UBO();
 }
 
 // Here we begin.
@@ -122,11 +141,6 @@ int main(int argc, char **argv) {
 	gBatchRenderer = std::make_shared<Renderer::Batch>();
 	gBatchRenderer->init(gConfigManager, gWindowManager);
 	LOG(INFO) << "Batch renderer online";
-
-	// Init Lighting system
-	LOG(DEBUG) << "Initializing lighting system";
-	gLights = std::make_shared<Renderer::Lights>();
-	LOG(INFO) << "Lighting system online";
 
 	// Setup the game structure
 	LOG(DEBUG) << "Setting up game structure";

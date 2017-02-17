@@ -16,12 +16,30 @@
 
 namespace Renderer {
 	Lights::Lights() {
+		// Init the array
+		dash_LightSourceParameters default_lightParam = {
+			false,
+			glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
+			glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
+			glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
+			glm::vec4(0.0f, 0.0f, 0.0f, 0.0f),
+			glm::vec3(0.0f, 0.0f, 0.0f),
+			1.0f,
+			90.0f,
+			0.0f,
+			1.0f,
+			0.0f,
+			0.0f
+		};
+		for(int i=0;i<MAX_NUM_LIGHTS; i++) {
+			lights[i] = default_lightParam;
+		}
 		// Gen the UBO
 		glGenBuffers(1, &UBO);
 		glBindBuffer(GL_UNIFORM_BUFFER, UBO);
 		glBufferData(GL_UNIFORM_BUFFER,
-				lights.size() * sizeof(gl_LightSourceParameters),
-				&lights[0], GL_DYNAMIC_COPY);
+				sizeof(lights),
+				&lights, GL_DYNAMIC_COPY);
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 		// Light is on Binding Index 1
 		GLuint binding_point_index = 1;
@@ -32,17 +50,10 @@ namespace Renderer {
 	void Lights::update_UBO() {
 		glBindBuffer(GL_UNIFORM_BUFFER, UBO);
 		GLvoid* p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
-		std::memcpy(p, &lights[0],
-				lights.size() * sizeof(gl_LightSourceParameters));
+		std::memcpy(p, &lights,
+				sizeof(lights));
 		glUnmapBuffer(GL_UNIFORM_BUFFER);
 		LOG(DEBUG) << "Updated Light parameters";
-	}
-
-	int Lights::add_light() {
-		gl_LightSourceParameters light_params;
-		lights.push_back(light_params);
-		// Return lastID and increment it after
-		return lastID++;
 	}
 
 	void Lights::set_light_state(int ID, bool state) {

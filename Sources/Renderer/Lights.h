@@ -15,13 +15,12 @@
 #include <GL/glut.h>
 #include <vector>
 
+#define MAX_NUM_LIGHTS 8
+
 namespace Renderer {
 	class Lights {
 		public:
 			Lights();
-
-			// Add a light
-			int add_light();
 
 			/// Change light parameters
 			// Enable or disable light
@@ -51,8 +50,7 @@ namespace Renderer {
 			// Default structure of the UBO
 			// This structure is the same as defined in OpenGL Shader
 			// Language Specifications in V 1.30 and newer
-			struct gl_LightSourceParameters {
-				gl_LightSourceParameters(): enabled(false) {}
+			struct dash_LightSourceParameters {
 				bool enabled;
 				glm::vec4 ambient; // Acli
 				glm::vec4 diffuse; // Dcli
@@ -67,12 +65,9 @@ namespace Renderer {
 				float quadraticAttenuation;// K2
 			};
 
-			std::vector<gl_LightSourceParameters> lights;
+			dash_LightSourceParameters lights[MAX_NUM_LIGHTS];
 
 			// UBO Id
 			GLuint UBO;
-
-			// Last ID of light (lastID is not in use, use it directly)
-			int lastID;
 	};
 }

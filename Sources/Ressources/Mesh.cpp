@@ -61,7 +61,7 @@ namespace Ressources {
 
 		// Bind Lights UBO to shader
 		unsigned int lights_block_index =
-			glGetUniformBlockIndex(shaderProgram, "gl_LightSources");
+			glGetUniformBlockIndex(shaderProgram, "dash_LightSources");
 		GLuint lights_binding_point_index = 1;
 		glUniformBlockBinding(shaderProgram,
 				lights_block_index,
