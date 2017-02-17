@@ -68,7 +68,6 @@ namespace Ressources {
 		// Data to fill
 		std::vector<Ressources::Vertex> vertices;
 		std::vector<GLuint> indices;
-		std::vector<Ressources::Texture> textures;
 
 		// Walk through each of the mesh's vertices
 		for(GLuint i = 0; i < mesh->mNumVertices; i++)
@@ -88,21 +87,7 @@ namespace Ressources {
 			vector.y = mesh->mNormals[i].y;
 			vector.z = mesh->mNormals[i].z;
 			vertex.Normal = vector;
-			// Texture Coordinates
-			// Does the mesh contain texture coordinates?
-			if(mesh->mTextureCoords[0])
-			{
-				glm::vec2 vec;
-				// A vertex can contain up to 8 different texture coordinates.
-				// We thus make the assumption that we won't use models where a
-				// vertex can have multiple texture coordinates so we always
-				// take the first set (0).
-				vec.x = mesh->mTextureCoords[0][i].x; 
-				vec.y = mesh->mTextureCoords[0][i].y;
-				vertex.TexCoords = vec;
-			}
-			else
-				vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
 			vertices.push_back(vertex);
 		}
 
@@ -119,6 +104,6 @@ namespace Ressources {
 		}
 
 		// Return a mesh object created from the extracted mesh data
-		return Ressources::Mesh(vertices, indices, textures, defaultShader);
+		return Ressources::Mesh(vertices, indices, defaultShader);
 	}
 }

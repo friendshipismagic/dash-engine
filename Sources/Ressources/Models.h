@@ -35,9 +35,6 @@ namespace Ressources {
 			// Private import recursive calls
 			void processNode(aiNode* node, const aiScene* scene);
 			Ressources::Mesh processMesh(aiMesh* mesh, const aiScene* scene);
-			std::vector<Texture> loadMaterialTextures(aiMaterial*,
-					aiTextureType, std::string);
-			GLint TextureFromFile(const char*, std::string);
 			GLuint defaultShader;
 			
 

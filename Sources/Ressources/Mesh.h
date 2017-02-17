@@ -29,18 +29,11 @@ namespace Ressources {
 		glm::vec2 TexCoords;
 	};
 
-	struct Texture {
-		GLuint id;
-		std::string type;
-		aiString path;
-	};
-
 	class Mesh {
 		public:
-			// Initializer, taking vertices, indices and textures
+			// Initializer, taking vertices, indices
 			Mesh(std::vector<Vertex>,
 					std::vector<GLuint>,
-					std::vector<Texture>,
 					GLuint shaderProgram);
 
 			// Render the mesh itself
@@ -49,7 +42,6 @@ namespace Ressources {
 			// The mesh itself
 			std::vector<Vertex> vertices;
 			std::vector<GLuint> indices;
-			std::vector<Texture> textures;
 			// The shader program associated to it
 			GLuint shaderProgram;
 			// OpenGL Objects

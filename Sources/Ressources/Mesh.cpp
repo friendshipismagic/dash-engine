@@ -17,11 +17,9 @@ namespace Ressources {
 	// Parts of this code are based on learnopengl website (CC public domain)
 	Mesh::Mesh(std::vector<Vertex> vertices,
 			std::vector<GLuint> indices,
-			std::vector<Texture> textures,
 			GLuint shaderProgram) {
 		this->vertices = vertices;
 		this->indices = indices;
-		this->textures = textures;
 		this->shaderProgram = shaderProgram;
 
 		// Now set the VAO, VBO and EBO
@@ -52,10 +50,6 @@ namespace Ressources {
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,
 				sizeof(Vertex), (GLvoid*)offsetof(Vertex, Normal));
 		glEnableVertexAttribArray(1);
-		// Vertex Texture Coords
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
-				sizeof(Vertex), (GLvoid*)offsetof(Vertex, TexCoords));
-		glEnableVertexAttribArray(2);
 
 		// Unbind the VAO to restore initial OpenGL context
 		glBindVertexArray(0);
