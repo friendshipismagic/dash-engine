@@ -25,23 +25,23 @@ namespace Renderer {
 
 			/// Change light parameters
 			// Enable or disable light
-			void set_light_state(bool);
+			void set_light_state(int, bool);
 			// Change ambient value
-			void set_ambient(glm::vec4);
+			void set_ambient(int, glm::vec4);
 			// Change diffuse value
-			void set_diffuse(glm::vec4);
+			void set_diffuse(int, glm::vec4);
 			// Change specular value
-			void set_specular(glm::vec4);
+			void set_specular(int, glm::vec4);
 			// Change position
-			void set_position(glm::vec4);
+			void set_position(int, glm::vec4);
 			// Change direction (only if directive spot)
-			void set_direction(glm::vec3);
+			void set_direction(int, glm::vec3);
 			// Change exponent
-			void set_exponent(float);
+			void set_exponent(int, float);
 			// Change cut-off value
-			void set_cutoff(float);
+			void set_cutoff(int, float);
 			// Change Attenuation values, constant, linear then quadratic
-			void set_attenuation(float K0, float K1, float K2);
+			void set_attenuation(int ID, float K0, float K1, float K2);
 
 		private:
 			void update_UBO();
@@ -58,10 +58,8 @@ namespace Renderer {
 				glm::vec4 position; // Ppli
 				glm::vec3 spotDirection; // Sdli
 				float spotExponent; // Srli
-				float spotCutoff; // Crli
-				// (range: [0.0,90.0], 180.0)
-				float spotCosCutoff; // Derived: cos(Crli)
-				// (range: [1.0,0.0],-1.0)
+				float spotCutoff; // Crli, range: [0.0,90.0], 180.0
+				float spotCosCutoff; // cos(Crli), range: [1.0,0.0] -1.0
 				float constantAttenuation; // K0
 				float linearAttenuation; // K1
 				float quadraticAttenuation;// K2
