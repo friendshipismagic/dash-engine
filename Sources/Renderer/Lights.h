@@ -43,8 +43,10 @@ namespace Renderer {
 			// Change Attenuation values, constant, linear then quadratic
 			void set_attenuation(int ID, float K0, float K1, float K2);
 
-		private:
+			// Update Lights
 			void update_UBO();
+
+		private:
 
 			// Default structure of the UBO
 			// This structure is the same as defined in OpenGL Shader

@@ -10,6 +10,7 @@
 #include "Lights.h"
 
 #include <cmath>
+#include <cstring>
 #include "easylogging++.h"
 
 namespace Renderer {
@@ -17,14 +18,18 @@ namespace Renderer {
 		// Gen the UBO
 		glGenBuffers(1, &UBO);
 		glBindBuffer(GL_UNIFORM_BUFFER, UBO);
-	}
-
-	void Lights::update_UBO() {
-		glBindBuffer(GL_UNIFORM_BUFFER, UBO);
 		glBufferData(GL_UNIFORM_BUFFER,
 				lights.size() * sizeof(gl_LightSourceParameters),
 				&lights[0], GL_DYNAMIC_COPY);
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	}
+
+	void Lights::update_UBO() {
+		glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+		GLvoid* p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
+		std::memcpy(p, &lights[0],
+				lights.size() * sizeof(gl_LightSourceParameters));
+		glUnmapBuffer(GL_UNIFORM_BUFFER);
 		LOG(DEBUG) << "Updated Light parameters";
 	}
 
