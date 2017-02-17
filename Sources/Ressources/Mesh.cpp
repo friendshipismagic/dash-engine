@@ -67,10 +67,6 @@ namespace Ressources {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Set each mesh's shininess property to a default value
-        glUniform1f(glGetUniformLocation(shaderProgram, "material.shininess"),
-				16.0f);
-
         // Draw mesh
         glBindVertexArray(this->VAO);
         glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
