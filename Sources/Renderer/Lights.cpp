@@ -18,7 +18,6 @@ namespace Renderer {
 	Lights::Lights() {
 		// Init the array
 		dash_LightSourceParameters default_lightParam = {
-			false,
 			glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 			glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
 			glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
@@ -29,7 +28,8 @@ namespace Renderer {
 			0.0f,
 			1.0f,
 			0.0f,
-			0.0f
+			0.0f,
+			false
 		};
 		for(int i=0;i<MAX_NUM_LIGHTS; i++) {
 			lights[i] = default_lightParam;
