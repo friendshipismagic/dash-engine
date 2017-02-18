@@ -20,7 +20,6 @@ struct dash_LightSourcesParameters {
 	vec4 specular; // Scli
 	vec4 position; // Ppli
 	vec3 spotDirection; // Sdli
-	GLfloat __padding_NOUSE1; // See above for more details
 	GLfloat spotExponent; // Srli
 	GLfloat spotCutoff; // Crli, range: [0.0,90.0], 180.0
 	GLfloat spotCosCutoff; // cos(Crli), range: [1.0,0.0] -1.0
@@ -28,7 +27,7 @@ struct dash_LightSourcesParameters {
 	GLfloat linearAttenuation; // K1
 	GLfloat quadraticAttenuation;// K2
 	bool enabled;
-	GLfloat __padding_NOUSE2; // See above for more details
+	GLfloat __padding_NOUSE[2]; // See above for more details
 };
 
 layout (std140) uniform dash_LightSources {
