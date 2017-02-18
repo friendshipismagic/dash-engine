@@ -61,15 +61,15 @@ namespace Renderer {
 				glm::vec4 specular; // Scli
 				glm::vec4 position; // Ppli
 				glm::vec3 spotDirection; // Sdli
-				float __padding_NOUSE1; // See above for more details
-				float spotExponent; // Srli
-				float spotCutoff; // Crli, range: [0.0,90.0], 180.0
-				float spotCosCutoff; // cos(Crli), range: [1.0,0.0] -1.0
-				float constantAttenuation; // K0
-				float linearAttenuation; // K1
-				float quadraticAttenuation;// K2
+				GLfloat __padding_NOUSE1; // See above for more details
+				GLfloat spotExponent; // Srli
+				GLfloat spotCutoff; // Crli, range: [0.0,90.0], 180.0
+				GLfloat spotCosCutoff; // cos(Crli), range: [1.0,0.0] -1.0
+				GLfloat constantAttenuation; // K0
+				GLfloat linearAttenuation; // K1
+				GLfloat quadraticAttenuation;// K2
 				bool enabled;
-				float __padding_NOUSE2; // See above for more details
+				GLfloat __padding_NOUSE2; // See above for more details
 			};
 
 			dash_LightSourceParameters lights[MAX_NUM_LIGHTS];
