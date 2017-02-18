@@ -27,10 +27,23 @@ namespace Renderer {
 			// Change clipping
 			void set_clipping(float, float);
 
+			// Relative movements
+			// Change distance to center (zoom, dezoom)
+			void zoom(float);
+			// Rotate camera
+			void rotate(glm::vec2);
+			// Pan
+			void pan(glm::vec2);
+			// without moving camera's position
+			// Yaw
+			void yaw(float);
+			// Pitch
+			void pitch(float);
+			// Roll
+			void roll(float);
+
 		pivate:
 			// Position, in polar coordinates
-			// As it's a TrackBall Camera, it is always diriged to the center
-			// of the world.
 			struct camera_UBO {
 				glm::vec3 position;
 				glm::vec3 direction;
