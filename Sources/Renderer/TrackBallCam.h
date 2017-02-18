@@ -18,6 +18,8 @@ namespace Renderer {
 			TrackBallCam();
 
 			/// Change camera parameters
+			// Change aspect ratio
+			void set_aspect_ratio(float);
 			// Change focal lens
 			void set_focal_lens(float);
 			// Change Depth Of View
@@ -47,6 +49,7 @@ namespace Renderer {
 				glm::vec3 direction;
 				glm::vec3 right;
 				glm::vec3 up;
+				GLfloat aspect_ratio;
 				GLfloat focal_lens;
 				GLfloat dof_dist;
 				GLfloat clip_start;
