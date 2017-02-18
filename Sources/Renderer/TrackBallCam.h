@@ -44,16 +44,16 @@ namespace Renderer {
 
 		pivate:
 			// Position, in polar coordinates
-			struct camera_UBO {
-				glm::vec3 position;
-				glm::vec3 direction;
-				glm::vec3 right;
-				glm::vec3 up;
-				GLfloat aspect_ratio;
-				GLfloat focal_lens;
-				GLfloat dof_dist;
-				GLfloat clip_start;
-				GLfloat clip_end;
-			};
+			glm::vec3 position;
+			glm::vec3 direction;
+			glm::vec3 right;
+			glm::vec3 up;
+			float focal_lens;
+			float dof_dist;
+			float clip_start;
+			float clip_end;
+			float aspect_ratio;
+			glm::mat4 view_matrix;
+			glm::mat4 proj_matrix;
 	};
 }
