@@ -18,8 +18,6 @@ namespace Renderer {
 			TrackBallCam();
 
 			/// Change camera parameters
-			// Change camera position
-			void set_position(glm::vec3);
 			// Change focal lens
 			void set_focal_lens(float);
 			// Change Depth Of View
