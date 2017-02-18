@@ -15,18 +15,20 @@
 precision highp float; // needed only for version 1.30
 
 struct dash_LightSourcesParameters {
-	bool enabled;
 	vec4 ambient; // Acli
 	vec4 diffuse; // Dcli
 	vec4 specular; // Scli
 	vec4 position; // Ppli
 	vec3 spotDirection; // Sdli
+	float __padding_NOUSE1; // See above for more details
 	float spotExponent; // Srli
 	float spotCutoff; // Crli, range: [0.0,90.0], 180.0
 	float spotCosCutoff; // cos(Crli), range: [1.0,0.0] -1.0
 	float constantAttenuation; // K0
 	float linearAttenuation; // K1
 	float quadraticAttenuation;// K2
+	bool enabled;
+	float __padding_NOUSE2; // See above for more details
 };
 
 layout (std140) uniform dash_LightSources {

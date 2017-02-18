@@ -50,19 +50,26 @@ namespace Renderer {
 			// Default structure of the UBO
 			// This structure is the same as defined in OpenGL Shader
 			// Language Specifications in V 1.30 and newer
+			// XXX: Warning UBO Alignment is based of std140 norm
+			// Padding is necessary to correctly fill the structure
+			// See: http://sunandblackcat.com/tipFullView.php?l=eng&topicid=21
+			// &topic=OpenGL-Uniform-Buffer-Objects for detailled explanation
+			// of how to do this.
 			struct dash_LightSourceParameters {
-				bool enabled;
 				glm::vec4 ambient; // Acli
 				glm::vec4 diffuse; // Dcli
 				glm::vec4 specular; // Scli
 				glm::vec4 position; // Ppli
 				glm::vec3 spotDirection; // Sdli
+				float __padding_NOUSE1; // See above for more details
 				float spotExponent; // Srli
 				float spotCutoff; // Crli, range: [0.0,90.0], 180.0
 				float spotCosCutoff; // cos(Crli), range: [1.0,0.0] -1.0
 				float constantAttenuation; // K0
 				float linearAttenuation; // K1
 				float quadraticAttenuation;// K2
+				bool enabled;
+				float __padding_NOUSE2; // See above for more details
 			};
 
 			dash_LightSourceParameters lights[MAX_NUM_LIGHTS];
