@@ -27,7 +27,7 @@ namespace Renderer {
 			// Change clipping
 			void set_clipping(float, float);
 
-			// Relative movements
+			/// Relative movements
 			// Change distance to center (zoom, dezoom)
 			void zoom(float);
 			// Rotate camera
@@ -42,9 +42,16 @@ namespace Renderer {
 			// Roll
 			void roll(float);
 
+			/// Get V+P matrices
+			// Get View matrix
+			glm::mat4 get_V();
+			// Get Projection matrix
+			glm::mat4 get_P();
+
 		pivate:
-			// Position, in polar coordinates
+			// Position, in polar coordinates (r, theta, phi)
 			glm::vec3 position;
+			// Other parameters used to set camera, in cartesian coordinates
 			glm::vec3 direction;
 			glm::vec3 right;
 			glm::vec3 up;
@@ -53,6 +60,10 @@ namespace Renderer {
 			float clip_start;
 			float clip_end;
 			float aspect_ratio;
+			// Should we recalculate V or P ?
+			bool v_changed;
+			bool p_changed;
+			// V+P Matrices
 			glm::mat4 view_matrix;
 			glm::mat4 proj_matrix;
 	};
