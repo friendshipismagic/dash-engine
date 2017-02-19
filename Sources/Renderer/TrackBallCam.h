@@ -49,18 +49,17 @@ namespace Renderer {
 
 		private:
 			// Position, in polar coordinates (r, theta, phi), radians
-			glm::vec3 position;
+			glm::vec3 position = glm::vec3(5.0f, 0.0f, 0.0f);
 			// Other parameters used to set camera, in cartesian coordinates
-			glm::vec3 center;
-			glm::vec3 up;
-			float field_of_view; // in degrees
-			float dof_dist;
-			float clip_start;
-			float clip_end;
-			float aspect_ratio;
+			glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
+			glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+			float field_of_view = 45; // in degrees
+			float clip_start = 0.1f;
+			float clip_end = 10.0f;
+			float aspect_ratio = 16/9;
 			// Should we recalculate V or P?
-			bool v_changed;
-			bool p_changed;
+			bool v_changed = true;
+			bool p_changed = true;
 			// V+P Matrices
 			glm::mat4 view_matrix;
 			glm::mat4 proj_matrix;

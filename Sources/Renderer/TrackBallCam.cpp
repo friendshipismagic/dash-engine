@@ -29,11 +29,6 @@ namespace Renderer {
 		p_changed = true;
 	}
 
-	void TrackBallCam::set_dof_distance(float dof) {
-		this->dof_dist = dof;
-		// TODO: What to do with it?
-	}
-
 	void TrackBallCam::set_clipping(float clip_start, float clip_end) {
 		this->clip_start = clip_start;
 		this->clip_end = clip_end;
