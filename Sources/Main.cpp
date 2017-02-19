@@ -89,18 +89,21 @@ void setupGame() {
 	// Set light 0
 	gLights->set_light_state(0, true);
 	gLights->set_diffuse(0, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-	gLights->set_specular(0, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-	gLights->set_position(0, glm::vec4(10.0f, 0.0f, 0.0f, 1.0f));
+	gLights->set_specular(0, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+	gLights->set_position(0, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+	gLights->set_direction(0, glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
 	// Set light 1
 	gLights->set_light_state(1, true);
 	gLights->set_diffuse(1, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
 	gLights->set_specular(1, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
 	gLights->set_position(1, glm::vec4( 0.0f,10.0f, 0.0f, 1.0f));
+	gLights->set_direction(1, glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
 	// Set light 2
 	gLights->set_light_state(2, true);
 	gLights->set_diffuse(2, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
 	gLights->set_specular(2, glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
 	gLights->set_position(2, glm::vec4( 0.0f, 0.0f,10.0f, 1.0f));
+	gLights->set_direction(2, glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
 
 	// Update all now
 	gLights->update_UBO();

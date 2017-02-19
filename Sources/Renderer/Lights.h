@@ -1,6 +1,4 @@
 /*
- * scene_light.hpp
- * Light controller main header
  * ----------------------------------------------------------------------------
  * "THE BEER-WARE LICENSE" (Revision 42):
  * <clement@decoodt.eu> wrote this file. As long as you retain this notice you
@@ -67,7 +65,7 @@ namespace Renderer {
 				GLfloat constantAttenuation; // K0
 				GLfloat linearAttenuation; // K1
 				GLfloat quadraticAttenuation;// K2
-				bool enabled;
+				GLint enabled;
 				GLfloat __padding_NOUSE[2]; // See above for more details
 			};
 

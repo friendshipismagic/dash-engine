@@ -20,14 +20,14 @@ struct dash_LightSourcesParameters {
 	vec4 specular; // Scli
 	vec4 position; // Ppli
 	vec3 spotDirection; // Sdli
-	GLfloat spotExponent; // Srli
-	GLfloat spotCutoff; // Crli, range: [0.0,90.0], 180.0
-	GLfloat spotCosCutoff; // cos(Crli), range: [1.0,0.0] -1.0
-	GLfloat constantAttenuation; // K0
-	GLfloat linearAttenuation; // K1
-	GLfloat quadraticAttenuation;// K2
-	bool enabled;
-	GLfloat __padding_NOUSE[2]; // See above for more details
+	float spotExponent; // Srli
+	float spotCutoff; // Crli, range: [0.0,90.0], 180.0
+	float spotCosCutoff; // cos(Crli), range: [1.0,0.0] -1.0
+	float constantAttenuation; // K0
+	float linearAttenuation; // K1
+	float quadraticAttenuation;// K2
+	int enabled;
+	float padding_NOUSE[2]; // See above for more details
 };
 
 layout (std140) uniform dash_LightSources {
@@ -41,8 +41,5 @@ out vec4 out_Color;
 
 void main(void)
 {
-	if(lights[0].enabled == true)
-		out_Color = vec4(ex_Position, 1.0);
-	else
-		out_Color = vec4(1.0, 1.0, 1.0, 1.0);
+	out_Color = lights[1].specular;
 }
