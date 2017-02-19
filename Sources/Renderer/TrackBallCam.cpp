@@ -8,9 +8,11 @@
  */
 
 // Use radians in glm
+#define GLM_ENABLE_EXPERIMENTAL
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
-#include <glm/gtx/polar_coordinates.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <algorithm>
 
 #include "Renderer/TrackBallCam.h"
 
@@ -83,7 +85,14 @@ namespace Renderer {
 		v_changed = false;
 		// The cartesian position is the cartesian coordinates of position,
 		// then translated to the camera center view.
-		glm::vec3 pos_cartesian = center + glm::euclidean(position);
+		float r = position.x;
+		float theta = position.y;
+		float phi = position.z;
+		glm::vec3 pos_cartesian = center;
+		pos_cartesian.x += r * std::sin(theta) * std::cos(phi);
+		pos_cartesian.y += r * std::sin(theta) * std::sin(phi);
+		pos_cartesian.z += r * std::cos(theta);
+
 		view_matrix = glm::lookAt(pos_cartesian, center, up);
 		return view_matrix;
 	}

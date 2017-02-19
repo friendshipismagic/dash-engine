@@ -47,7 +47,7 @@ namespace Renderer {
 			// Get Projection matrix
 			glm::mat4 get_P();
 
-		pivate:
+		private:
 			// Position, in polar coordinates (r, theta, phi), radians
 			glm::vec3 position;
 			// Other parameters used to set camera, in cartesian coordinates
