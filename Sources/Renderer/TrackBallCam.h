@@ -10,7 +10,6 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include <GL/glut.h>
 
 namespace Renderer {
 	class TrackBallCam {
@@ -20,8 +19,8 @@ namespace Renderer {
 			/// Change camera parameters
 			// Change aspect ratio
 			void set_aspect_ratio(float);
-			// Change focal lens
-			void set_focal_lens(float);
+			// Change Fov, in degrees
+			void set_field_of_view(float);
 			// Change Depth Of View
 			void set_dof_distance(float);
 			// Change clipping
@@ -30,16 +29,16 @@ namespace Renderer {
 			/// Relative movements
 			// Change distance to center (zoom, dezoom)
 			void zoom(float);
-			// Rotate camera
+			// Rotate camera (theta, phi), radians
 			void rotate(glm::vec2);
-			// Pan
-			void pan(glm::vec2);
+			// Pan (x, y, z)
+			void pan(glm::vec3);
 			// without moving camera's position
-			// Yaw
+			// Yaw in radians
 			void yaw(float);
-			// Pitch
+			// Pitch in radians
 			void pitch(float);
-			// Roll
+			// Roll in radians
 			void roll(float);
 
 			/// Get V+P matrices
@@ -49,18 +48,17 @@ namespace Renderer {
 			glm::mat4 get_P();
 
 		pivate:
-			// Position, in polar coordinates (r, theta, phi)
+			// Position, in polar coordinates (r, theta, phi), radians
 			glm::vec3 position;
 			// Other parameters used to set camera, in cartesian coordinates
-			glm::vec3 direction;
-			glm::vec3 right;
+			glm::vec3 center;
 			glm::vec3 up;
-			float focal_lens;
+			float field_of_view; // in degrees
 			float dof_dist;
 			float clip_start;
 			float clip_end;
 			float aspect_ratio;
-			// Should we recalculate V or P ?
+			// Should we recalculate V or P?
 			bool v_changed;
 			bool p_changed;
 			// V+P Matrices
